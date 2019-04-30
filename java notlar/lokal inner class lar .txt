@@ -1,0 +1,31 @@
+lokal inner class lar pratic birer yontem dir kucuk bir class a ihtiyacýmýz oldugu zaman o sýfýrdan bir class sayfasý olusturmak zor gelir onun icin 
+
+class ý Main methodu icerisinde tanýmlayap maiin icerisnde kullanabiliriz assagida oldugu gibi 
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+	 class Alan{  
+		 
+		 
+		 public void  kare_alan(int kenar) {
+			 
+			 System.out.println(" karenin alaný : "+  kenar*kenar);
+			 
+		 }
+		
+		
+		
+	}
+	 
+	 Alan alan =new Alan();
+	 
+	 alan.kare_alan(9);
+	 
+
+	}
+
+}

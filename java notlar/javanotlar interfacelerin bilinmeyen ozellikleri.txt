@@ -1,0 +1,10 @@
+interfaceler icerisinde hic bir sekilde degisken veya kod bulagu bulunan method veya olusturdugumuz bir interface den hicbir zaman bir obje olusturamayacagýýmýzý ogrendik ( tabiki farklý bir 
+sýnýfýn objesine referans gonderebilmesi haric) yani genel itibari ile interfacelerden obje olusturmak yasak obje olusturamadýmýz icin hicbir sekilde method ta cagiramayiz veya degisken 
+cunku onu cagiracak objesi yok  ama java bize degerini olusturdumuz anda vermek  ve public olmasý sartý ile degisken olusturmamýza izin vermektedir
+assagidaki orneklerdeki gibi  bu degiskenler final da olabilr    bu degiskenlerin cagirilmasý ise interface in ismi ile yapýlmaktadýr  ( constructure ile cagirabilmemiz icin olusturdugumuz 
+static bir method gibi)   (interface in adý ).(degiskenin ismi) gibi
+
+
+interfacelerde methodlar interfacelerde kendisini cagiracak bir obje olusturamadimiz icin method olusturmaya kaldýktan sonra hata vermektedir 
+yani interfacelerde method olusturmaya program izin vermemektedir ama olusturdumuz methodu static  tanýmlarsak  methoduda olusturmamýza izin verir  ve degiskenlerdeki gibi 
+interface ismi ile cagirip kullanmamýza izinverir

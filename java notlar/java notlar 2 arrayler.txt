@@ -1,0 +1,49 @@
+Arrayler
+array olustururken 
+tek boyutlu  int [] x=new int[4];   int [] y=new int[4];
+cok boyutlu int [][] x=new int[4][2];
+arrayleri kendimiz dolsurabilirz
+int [] x ={4,6,8,1}
+
+yukarıdaki tanımladıgımız x ve y array i nin indis degerlerinin aynı 
+oldugunu varsayarsak
+bunları karsılastırırken if(x==y)dersek yanlıs bir karsılastirma yapmis oluruz
+cunku bunlar bellekte farklı yerlerde olusurlar bu arraylerin pc bunların icini incelmez 
+belllekte bulundugu yeri inceler ama icini inceletmek istiyorsak 
+if(Arrays.equals(a1,a2)) seklinde karsılastırma yapabiliriz
+
+array donderen bir metod olusturabiliriz
+
+public int[] arrayidoldur(int sayi)
+{
+for(....)
+{cikti[i]= " example";
+}
+
+return cikti;
+}
+
+uzunlugu bilinmeyen arrayi bulmak  
+for(int i=0;array.length;i++)
+
+constructure dan array olusturma        Kart[][] kartlar =new Kart[4][4];  // kart objesini tasıyan array
+
+kart(char deger)
+{
+this.deger=deger;
+}
+
+
+foreach
+int [] x new int[5]; x dizisinin icini doldurmaya kalkarsak for dongusu  ile tek tek doldurmak durumunda kalmaktayız
+
+ama for ic ile daha pratik bir yolu var 
+
+for(int y :x){
+
+dedigimizde y elemanı bir donguye girerek x elemanlarını tek tek sahipleniyor bu sekilde donguyle 
+yazdırma ve bastırma islemlerini yapabiliriz
+}
+
+
+ 

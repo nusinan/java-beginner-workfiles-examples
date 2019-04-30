@@ -1,0 +1,38 @@
+package linkedlist;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+
+public class Linkedlist {
+
+   
+    public static void main(String[] args) {
+        LinkedList<Integer> linkedlist =new LinkedList<Integer>();
+        ArrayList<Integer> Arrylist =new ArrayList<Integer>();
+        
+          zamanhesapla("linkedlist", linkedlist);
+          zamanhesapla("arraylist", Arrylist);
+    }
+  
+     
+    public static void zamanhesapla(String veritipi,List<Integer> list){   //inheritence sayesinde istedigimiz array degiskenini alabiliyoruz
+    
+        
+        long baslangic;       // zamanlama degerini tutuyor
+        long bitis;
+        
+        baslangic=System.currentTimeMillis();  //millisaniye cinsinden zamanı alıyor
+        for(int i=0;i<1000000 ;i++){
+        
+        
+        list.add(0,i);
+        }
+        bitis=System.currentTimeMillis();
+        System.out.println(veritipi +" ekleme suresi" + (bitis-baslangic)+" ms");
+        
+    
+    }
+    
+}

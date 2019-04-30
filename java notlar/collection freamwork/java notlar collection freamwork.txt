@@ -1,0 +1,7 @@
+colelction framework 
+javada bircok tamsayinin ve bazý sýralama ilemlerinin yapmak verileri grup halinde tutmak,  ve onlar icerisinde bazý islemlerde 
+kolaylýk saglamak vb islemleri saglamak icin icerisinde bircok soyut ve somut class,interface ,ve method bulunduran 
+java gelistiricilerin yazdýgý bir frameworktur colelction framework u veri liste halinde tutmak icin ( List ) interface ini
+kuyruk halinde tutulmasý icin ( Quoue )  interface ini  benzersiz tutulmasý icin  ( Set )interface i bulunur 
+Map interface i  collection interface inin icerisinde buolunmamasýna ragmen  collection framework u icin kullanýslýdýdr
+

@@ -1,0 +1,45 @@
+
+public class Stringler {
+
+
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+		String a=" numan";
+		String x=new String("sinan");  // Stringler gelismis birer sýnýftýr ve obje seklinde tanýmlanabilirler ve referanslarýndan pc de string ler icin tanýmlanmýs bir cok method bulabiliriz
+		// sekilde olusturmamýzýn nedeni obje seklinde olusturdugumuzda bellekte farklý yerlerde olusmaktadir
+		String y= new String("sinan");
+		if(x==y) {
+			
+			System.out.println("esitler");  // bellekte farklý yerlerde olduklarý icin referanslarýn yeri farklý oldugundan esit olarak gostermedi
+		}
+		
+		System.out.println("***************");
+		if(x.equals(y))       //bellekete  farklý yerlerdeki objelri esitlemek icin equels kullanýlýr     burada referanslarý deyil icergini karsilastiriyoruz
+		{
+			
+			
+			System.out.println(" esitler");
+		}
+		
+		
+		System.out.println(x);
+		System.out.println("harf sayisi :" +x.length() ); // harf sayisi
+		
+		System.out.println(" 0 . ci index "+ x.charAt(0)); // Stringin indexleirndeki harf sayisini buluyoruz
+		System.out.println(" 3 . ci index "+ x.charAt(3));
+		System.out.println(" son eleman "+ x.charAt(x.length()-1));
+		System.out.println( x.toLowerCase());
+		System.out.println( x.toUpperCase());
+		String a1= "1997";
+		int x1=Integer.parseInt(a1); // String i int e cevirme
+		
+		System.out.println(x1);
+		
+		
+
+	}
+
+}

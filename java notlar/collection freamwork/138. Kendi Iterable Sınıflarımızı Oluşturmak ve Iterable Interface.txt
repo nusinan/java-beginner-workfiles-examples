@@ -1,0 +1,102 @@
+
+
+******************************************   Main class ý **********************************************************
+import java.util.Iterator;
+
+ 
+public class Main {
+    
+    public static void main(String [] args){
+    
+    String [] kanallar={ " kral fm"," alem fm"," viva"," radyo maydonez", " radyo pop"};
+
+     
+    Radyo radyo = new Radyo(kanallar);                
+    
+    Iterator<String>  iterator = radyo.iterator();  // burada da ikinci yondem  mi kullandýk
+    
+    while (iterator.hasNext())
+    {
+    
+        System.out.println(iterator.next());
+    }
+    
+    
+   for(String s : radyo){   // program arka plamda for each ile  radyo objesini ekrana bastýrma yapmak icin iterator kullanýr  
+                               // ama radyo objesinin herhangi bir objesi olmadýgý icin ekrana bastýrma su an yapamýyoruz  
+                              //  bastýrmak icin iterable interface ini implemente edip override methodlarký duzenlersek ekrana bastýrabiliriz 
+                              // bradyo iz simdi foreach in ekrana bastýrmak icin kullandýgý iterable methodunu radyo icersinde implemente edip 
+                              // cagirdigimiz icin for each dongusunun kullandýgý iterable ý isetdigimiz sekilde düzenledigi icin artýk kullanýlabilmektedir
+    
+        System.out.println(s);
+    }
+
+    
+    
+    
+    }
+    
+}
+             ******************************************* Radyo class ý **********************************************
+
+
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+
+public class Radyo implements Iterable<String>{
+    private ArrayList<String> kanallarlisttesi =new ArrayList<String>(); // Arraylist objesi olusturduk
+    
+    public class RadyoItererators implements Iterator<String> {   // burada ikinci yontem olarak bir class olusturp iterotor u implemete ettik
+                                                                  //ve degisiklikleri class uzerinde cagýrarak devam ettirdik
+                                                                   // burada override ettigimiz  hasnext ve next  i tekrar düzenleyerek   2ci yontemi kullandýk
+        private int  index=0;
+        @Override
+        public boolean hasNext() {
+            if(index < kanallarlisttesi.size())
+            {
+            return true;
+            }
+            else
+            {
+            return false;
+            }
+            
+        }
+
+        @Override
+        public String next() {
+            String deger=kanallarlisttesi.get(index);
+            index++;
+            
+            return deger;
+            
+        }
+    
+    
+    }
+    
+    
+
+    public Radyo(String[] kanallar) {
+        
+        for(String kanal : kanallar){
+         
+            kanallarlisttesi.add(kanal);
+           
+        }
+    }
+
+    @Override
+    public Iterator<String> iterator() {
+     
+        
+        //return kanallarlisttesi.iterator();
+        return new RadyoItererators();  
+    }
+    
+     
+    
+}
+

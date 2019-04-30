@@ -1,0 +1,62 @@
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+public class Main {
+    
+    private static ArrayList<Integer>  icerik =new ArrayList<Integer>();  // dosya þicerisindekn bayt code larý saklamak icin  arraylists olusturduk
+    
+    public static void  dosyaoku() // dosya okumak icin method olusturduk
+    {
+        try {
+            FileInputStream in = new FileInputStream("Apocalyptica - I Don't Care ft. Adam Gontier.mp3");// FileýnputClass ýmýzla dosyayý iceri aldýk
+            int oku; 
+              
+                while ((oku=in.read())!=-1){//  dosyayý nýn bayt code unu oku int ine atadýk
+                    icerik.add(oku);  //  oku int ini icerik arraylist imize gonderdik
+    
+            } 
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }
+    public static void kopyala(String dosyaismi){
+        try {
+            FileOutputStream out = new  FileOutputStream(dosyaismi); //dýsarýya dosya cýkratmasý icin FileOutPutStream  class ýný cagýrdýk
+            
+            
+            for(int deger : icerik){ // Array list icerisindeki bytcodelarý deger adýndaki bir int e gonderdik
+            
+            out.write(deger); // deger icerisindeki ifadeleri  out adýndaki olusturulacak dosyalara gonderilmesini sagladýk
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    
+    }
+    public static void main(String [] args){
+        dosyaoku();
+        long baslangýc=System.currentTimeMillis();
+        kopyala("Musicx.mp3");
+        kopyala("Musicy.mp3");
+        kopyala("Musicz.mp3");
+        long bitis =System.currentTimeMillis();
+        
+        System.out.println(" 3 dosyanýn kopyalanmasý süresi "+ ((bitis-baslangýc)/1000)+" saniye");
+    
+    
+    
+    }
+}

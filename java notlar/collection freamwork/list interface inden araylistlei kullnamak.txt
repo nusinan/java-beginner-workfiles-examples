@@ -1,0 +1,38 @@
+package arrylist;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class ArryList {
+
+   
+    public static void main(String[] args) {
+        // TODO code application logic here
+        ArrayList<String> Arry =new ArrayList<String>();
+        List<String> list= new ArrayList<String>();
+        
+        list.add("python");    //  listeye eleman eklemme 
+        list.add(" php");
+        list.add(" java");
+        list.add(" c++");
+        
+        
+        System.out.println( list.get(0));   // ekrana eleman bastýrma
+        System.out.println( list.get(3));
+        
+        for( int i=0; i< 3;i++)
+        {
+            System.out.println((i+1)+" nci sýra  :"+ list.get(i));
+        }
+        
+        list.remove(1);      // listeden eleman cikarma
+        for(String s : list)    // diziyi for each ile ekrana yazdirma
+        {
+        System.out.println(s);
+        }
+        
+        
+    }
+    
+}

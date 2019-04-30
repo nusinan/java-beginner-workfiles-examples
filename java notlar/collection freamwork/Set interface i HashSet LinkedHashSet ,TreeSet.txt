@@ -1,0 +1,141 @@
+ Set Interface ile List Interface’in farký
+    List interface’i implemente eden classlar bir elementten birden fazla depolayabilirken,  
+    Set interface’i implemente eden classlar bir elementten sadece bir tane depolarlar.
+   
+    *****************************************************************
+   
+    HashSet Sýnýfý
+    
+    avantajý hýz bakýmýndan en hýzlýsýdýr
+    HashSet extends AbstractSet implements Set Interface extends Collection extends Iterable
+
+    1.HashSet elementleri "hashing" yani hash table  mekanizmasýna uygun bir biçimde depolarlar
+    (Her element belli bir key'e göre depolanýr.)
+
+    2.HashSet bir element'i sadece bir defa depolar.(Set Interface)
+
+    3. Elementlerin ekleme sýrasýna göre depolamaz.
+
+    ******************************************************************
+
+    LinkedHashSet Sýnýfý
+    avantajý HasSet ile TreeSet in arasýnda bir ozelligi olmasýdýr
+    LinkedHashSet extends HashSet extends AbstractSet implements Set Interface extends Collection extends Iterable
+
+    1. LinkedHashSet hem HashTable hem de Set Interface'in LinkedList implementasyonu gibi davranýr.
+
+    2. HashSette olduðu gibi bir elementi sadece bir defa depolar.(Set Interface)
+
+    3. Elementleri ekleme sýrasýna göre depolar.
+    
+    ******************************************************************
+
+    TreeSet Sýnýfý
+     
+    avantajý sýralý olmasý
+    TreeSet sýnýfý NavigableSet inteface'ini implemente eder ve AbstractSet sýnýfýndan miras alýr. 
+    NavigableSet interface'i de SortedSet interfaceinden miras alýr. 
+
+    1. Elementleri depolamak için Tree yani Aðaç yapýsýný kullanýr.
+
+    2. Elementleri alfabetik olarak sýralarlar.
+
+
+     *****************************************************************
+
+    HashSet vs LinkedHashSet vs TreeSet   
+
+    HashSet, Hash Table mekanizmasýný uyguladýðý için elementler sýralý deðildir. Ekleme,Çýkarma ve
+    Arama metodlarý sabit zamanda( Time Complexity : O(1) ) çalýþýr. 
+
+    TreeSet, elementleri tree yapýsýna yani aðaç yapýsýna uygun depolar. Ekleme,Çýkarma ve 
+    Arama metodlarý O(log(n)) complexitysi ile çalýþýr.
+
+    LinkedHashSet sýnýfý hashtable ile linked list yapýsýný kullanarak elementleri depolar.Bu yüzden,
+    elemetler ekleme sýrasýna göre depolanýr. Ekleme,Çýkarma ve Arama metodlarý 
+    sabit zamanda( Time Complexity : O(1) ) çalýþýr. 
+
+
+
+package setmain;
+
+import static java.lang.reflect.Array.set;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class SetMain {
+
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Set<String> set1=new HashSet<String>();
+        Set<String> set2=new LinkedHashSet<String>();
+        Set<String> set3=new TreeSet<String>(); 
+        
+         set1.add("java");
+         set1.add("c++");
+         set1.add("php");
+         set1.add("js");
+         set1.add("django");
+         
+         
+         set2.add("java");
+         set2.add("c++");
+         set2.add("php");
+         set2.add("js");
+         
+         
+         
+         set3.add("java");
+         set3.add("c++");
+         set3.add("php");
+         set3.add("js");
+         
+         System.out.println("HashSet****************");
+         for(String s: set1)
+         {
+             System.out.println(s);
+         }
+         
+         System.out.println("LinkedHashSet**********");
+          for(String s: set2)
+         {
+             System.out.println(s);
+         }
+          
+          System.out.println("TreeSet***************");
+           for(String s: set3)
+         {
+             System.out.println(s);
+         }
+           System.out.println(set1.contains("java"));//  listenin icerisinde  istenilen elemanýn olup olmadýgýný kontrol eder  ve boolean deger donderir
+           System.out.println(set1.contains("go"));
+           System.out.println( set1.isEmpty());// dizinin dolu olup olmadýgýný kontrol ediyor ve boolean bir deger donderiyor
+           
+           Set<String> set4=new HashSet<String>();
+           Set<String> set5=new HashSet<String>();
+           
+           set4.add("a");
+           set4.add("b");
+           set4.add("c");
+           set4.add("d");
+           
+           
+           set5.add("a");
+           set5.add("b");
+           set5.add("e");
+           set5.add("f");
+           
+           Set<String> fark=new HashSet<String>(set4);  //fark referansýna set4 referansýný atadýk
+           
+           System.out.println(fark.removeAll(set5));    // fark ýn set5 ten farklý oolan degerlerini aldýk
+           System.out.println(fark);
+           
+           Set<String> kesisim=new HashSet<String>(set4);  // kesisim referansýna set4 referansýný atadýk
+           System.out.println(kesisim.retainAll(set5));    // burada kesisim in set5 ile kesisimi varsa true ifadesi döndermesini sagladýk 
+    
+    }
+ 
+}
+

@@ -1,0 +1,25 @@
+exception (istisna) programlarýmýzýn calýsma zamanýnda (runtime) normal akýþýný bozan olaylar
+
+exception handling(istisna yakalam) : exceptionlarýn yakalanmasý ve programýmýzýn daha
+ güvenli çalýstýrýlmasý icin gelistirilmis bir mekanizmadýr
+
+exception hatalarýna örnek olarak input output hatalarý,veritabaný baglantý hatasý,ve artimetik hatalar
+
+bir exception hasasý sýrasýnda programýmýz calismasýný durdurur ve devam etmez programýn durmamasý icin o hatayý handle (yakalayýp) 
+programýmýzýn devam etmesini saglatabiliriz 
+
+exception türleri 
+
+Checked exception(kontrollü exception) 
+
+runtime exceptionlardan türemeyen her class checked exception  kapsamýna girer
+bu hatalarý yakalamassak java bu hatalarý bize yakalayabilecegimizi soyler  ornek IOException SqlException   ,en güvenli exception türüdür
+
+UnChecked exception  (kontrolsüz exceptionlar)
+
+runtime exceptionlardan türeyen her class unchecked kapsamýna girer ve programý calýstýrmadan once kontrol edilmezler
+ yani java bu exceptionlarý öngöremez yani programý calistirmadan önce kontrol edilemezler  hatalarý yakalama programcýnýn sorumlulugundadýr
+ en cok sýkýntý cekilen exception türüdür  örnek : Aritmatik exception Null pýointer Exception   12 nin sýfýra bolunemez olmasý gibi hatalar
+
+Error 
+geri dönulmez ve tamir edilemeyen hatalardýr   örnek  OutOfmemoryError hatasý

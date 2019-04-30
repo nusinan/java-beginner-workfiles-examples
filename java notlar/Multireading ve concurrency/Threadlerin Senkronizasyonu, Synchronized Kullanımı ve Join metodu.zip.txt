@@ -1,0 +1,63 @@
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class ThreadSafe {
+    private int count = 0;
+    public synchronized void artir(){           // sycronized edttigimiz method
+        
+        count++;
+    }
+    public void threadleriCalistir(){                      // burada bir thread olusuturduk ve thread imizin degerini her defasýnda bir arttýrdýk
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(int i = 0 ;  i < 5000 ; i++) {
+                	// count++;                            // ilk basta degerini count  icerisinde arttýrmayý denedik ama islem sýrasý ve onceligi alttaki thread ile karýstýgý icin
+                	                                       //  degeri 10000 e tam ulasmadý cunku bildigimiz gibi threadler calsýma oncelligi cok fazla degisiklik gosterebildgi icin 
+                	                                       //  bir sekronizasyon sorýunu olusumaktadýr mesela thread1  calýstýgý zaman deger arttýrýmýný atamayýp ikinci thread calýsmaya 
+                	                                        // basladý ikiside sýfýra bir degeri atayýp  1 e yukseltirler halbuki thread1  e atadýktan sonra degeri 1 artttýrýp 2 yuýkseltmesi
+                	                                        //  gerekmekteydi bir bu sekilde  bir senkron sorunu olustu  bu senkron  bozouklugunu gidermek icin  bir thread1 in yaptýgý 
+                	                                        // islemi bitirdikten sonra thread 2 nin islemini yapmaya baslamasýdýr  buunu yapmak icin arttýr methoduna synchorized  diye 
+                	                                       //  bir tanýmlama getirdik synchorized burada bir  (lock) olusturdu yani thread 1 e bir anahtar ver di bu anahtarla methodu calýsýtýr
+                	                                       // masýný sagladý.islemini bitirdikten sonra anahtarý thread ikiye vermesini soyledi ve bu sekilde syncronized sorununu cozmus olmuk
+                	                                         //  ama burada sycronization tek dez avantajý kendisi bitmeden dieger methodlarýnda baslamasýna izin vermemesidir bu sorunun cozumunede 
+                                                                // diger derste deginilmistir
+                    artir();
+                    
+                }
+            }
+        });
+        Thread thread2 = new Thread(new Runnable() {       // burada ikinci bir thread olusturduk 
+            @Override
+            public void run() {
+                for(int i = 0 ;  i < 5000 ; i++) { 
+                    artir();
+                }
+            }
+        });
+        
+        thread1.start();
+        thread2.start();
+        
+        try {
+            thread1.join();               // burada thread1 ve thread2 nin haricinde main methodununn  threadi de onlarla beraber calýsmaktadýr ve threatlerde islem sýradý karýsýk 
+                                          // oldugu icin threadlerin islemleri bitmeden main merthodu baslayabilmektedir main methodu bize baslamayan islemin degerini donderebilecegi icin
+                                          // main methodunu thread lerin islemleri bittikten sonra baslamasýný istedik ve thread bir ve thread2 ye join methodu gondererek main in kendilerini 
+                                        //  beklemesimi sagladýk yani thread1 ve thread2 islemini tamamladýktan sonra main methodunun calsýmasýný sagladýk
+            thread2.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ThreadSafe.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        System.out.println("Count deðiþkenin deðeri : " + count);
+           
+    }
+    public static void main(String[] args) {
+        ThreadSafe threadsafe = new ThreadSafe();  // burada da consructurdan tanýmladýgýmýz objenin icerini   constructorda tanýmlý oldugu icin direk cagýrdýk ve calýstýrdýk
+        
+        threadsafe.threadleriCalistir();
+   
+    }
+   
+}

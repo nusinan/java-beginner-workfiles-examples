@@ -1,0 +1,33 @@
+MultiTasking
+MultiTasking birden fazla isi ayný anda yapma eylemi  mesela telefonla konusurken yemekte yiyebiliriz ayný zamanda televizyonda seyredebiliriz
+veya birgisayarlarda multi tasking sayesinde birden fazla programý ayný anda calýstýrabilmekteyiz  google +gom player+ notepad+....vs gibi yani 
+bircok ugulamayý ayný anda calýstýrmaktýr
+MultiTreading
+MultiTreading bir proses icerisinde bircok calýsma unitesi olusturan(thread) bircok isi bir arada yapmaktýr
+mesela world de yazý yazarken ayný anda bu yazýlan yazýlarýnda kontrol edilmesi gibi
+
+MultiTasking ile MultiThreading in farký   Multitasking te birden fazla uygulama ayný anda calýsabilirken MultiTreading te bir uygulamnýn icerisinde
+ayný anda birden fazla islemin calismasýdýr
+process ve Thread kavramý
+ precess bilgisayarlarda calýsabilecek her turlu uygulamadýr mesela google chrome ,gom player ,photoshop vs vb
+her proces bellekte kendi memory space ine (bellek alanýna ) sahiptir
+bir java uygulamasýný calýstýrdýgýmýz zaman bu uygulama JVM uzerinde calýcak bir  process e donusmektedir,
+java projeleri process e donustukleri zaman kendi ( memory space )ini veya diger adýyla  ( heap )ini olusturur
+eger elinmizde 2 tane calsýr durumda uygulamamýz varsa bunlar  bu uygulamalar birbirlerinin bellek ( memory space ) yada heap lerine  erisemezler
+
+thread , process in icerisinde bulunan bir calisma unitesidir her java programý en az bir tahe thread a sahiptir 
+bize java icerisinde thread  olusturmasak bile main iceirsinde main thread olusturulur  main threadlerinin yanýna  degisik islemler yaptýrmak 
+icin biz kendimiz degisik islemler olusturabiliriz
+
+threadler processlerin  icinde olustugu icin processlerin  olusturdugu bellek alanýna direk  olarak erisim saglayabilirler
+Ayrýca bellek alanýndan ayrý olarak her thread ýn sadece kendinin erisebilecegi bir tane thread stack i bulunur
+
+multiTreading  e neden ihtiyac duyuyoruz 
+ eger biz bir islemi multitreading kullanmadan uygulamayý sadece mainthread ile yazarsak (main thread) main methodu bun islem bitene kadar baska 
+bir islem gerceklestiremeyecek  ama biz dosya indirme islemine bir tane thread olusuturup yaparsak main thread diger islerine zaman ayýrabilir
+ yani bizim uygulamamýz bircok islemi paralel yapacak hale gelmis olacak biz threadlarýn eszamanlý olarak calýsmasýna concurrency(eszamnalý) diyoruz
+
+java da threadlarýn ne zaman baslayýp ne zaman biteccegini jvm ve isletim sistemi  belirledigi icin  program cýktýlarýnda farlýlýklar gosterebilir
+
+
+

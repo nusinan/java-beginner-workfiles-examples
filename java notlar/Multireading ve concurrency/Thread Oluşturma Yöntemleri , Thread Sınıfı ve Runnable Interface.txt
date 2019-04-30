@@ -1,0 +1,136 @@
+1. yontem Thread class ýný extend ederek Thread olusturmak ************************************************************	 
+
+******************************************************************  printer ******************************************************************
+
+
+package com.numansinan.thread1;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class Printer extends Thread {   // ilk yontemde Thread class ýný extend ederek yapýlabiilir
+  
+    private String isim;        
+    public Printer (String isim){    // obje olusuturmak icin construtor tanýmladýk
+    this.isim=isim;
+    }
+    @Override
+    public void run() {     // thread in icerisinde calýstýrabilecegimiz bir run methodu olusuturduk
+        super.run(); 
+        
+        System.out.println(isim + " çalýsýyor...");
+        
+        for(int i=0; i<10 ;i++){
+            try {
+                System.out.println(isim+" yazýyor..."+i);
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                System.out.println(" thread kesintiye ugradý..");
+            }
+        }
+        System.out.println(isim+ " isini bitirdi...");
+    } 
+}
+ 
+*****************************************************************  main   ************************************************************************
+
+
+package com.numansinan.thread1;
+
+
+public class Main {
+    public static void main(String [] args){  // main thread icerisinde islemler calsýyor
+        System.out.println(" main thread calisiyor...");
+        
+        Printer printer1=new Printer("printer1");  //objelerimizi olusturduk
+        Printer printer2=new Printer("printer2");
+        
+        printer1.start();    // objelerimizi cagirdik
+        printer2.start();
+    
+    
+    
+    
+    }
+    
+}
+2.yontem runnable interface ini implemente etmek    **************************************************************************************
+
+
+**********************************************************  printer class   ***************************************************************
+
+
+package com.numansinan.thread2;
+public class Printer  implements Runnable{  // runnable interface ini implements ettik
+    private String isim;
+
+    public Printer(String isim) {   //  obje olusturmak icin constructur tanýmladýk
+        this.isim = isim;
+    }
+    @Override
+    public void run() {         // runnable ýn icerisinden run methodunu override ettik
+        
+        System.out.println(isim + " çalýsýyor...");
+        
+        for(int i=0; i<10 ;i++){
+            try {
+                System.out.println(isim+" yazýyor..."+i);
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                System.out.println(" thread kesintiye ugradý..");
+            }     
+        }
+        System.out.println(isim+ " isini bitirdi...");      
+    }  
+}
+
+******************************************************************     main     **************************************************************
+
+package com.numansinan.thread2;
+public class Main {
+    
+    public static void main(String [] args){  // main thread icerisinde islemler calsýyor
+        System.out.println(" main thread calisiyor...");
+        
+       Thread printer1 =new Thread(new Printer("printer1"));   // runnable interface inden objelerimizi yandaki gibi tanýmladýk
+       Thread printer2 =new Thread(new Printer("Printer2"));
+       
+       printer1.start();  // objelerimizi cagirdýk
+       printer2.start();
+    }
+}
+
+3. yontem *********************************************************************************
+
+*******************************************************   main        **************************************
+
+
+package com.numansinan.thread3;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+public class Main {   
+   public static void  main(String [] args){
+
+  new Thread(new Runnable() {     // class olusturmadan main methodu icerinde methodlarý tek seferlik kullanýmlýk icin tanýmladýk
+         @Override
+         public void run() {
+             System.out.println(" thread calisiyor...");
+             for(int i=1;i<=10;i++){
+                 try {
+                     System.out.println(" yazýyor : " + i); 
+                     Thread.sleep(1000);
+                 } catch (InterruptedException ex) {
+                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+             
+             }
+         }
+     }).start();
+       System.out.println("Main thread calisiyor...");  
+   }
+    
+}
+
+
+
+
+

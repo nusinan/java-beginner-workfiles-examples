@@ -1,0 +1,88 @@
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.ListIterator;
+
+
+
+public class Linkedlist {
+	
+	public static void listeyibastýr(LinkedList<String> gidilecekyerler )
+	{
+		
+		/*for (String x : gidilecekyerler )
+		{
+			System.out.println(x);
+			
+			
+		}*/
+		ListIterator<String> iterator=gidilecekyerler.listIterator();	
+		
+		while(iterator.hasNext())
+		{
+			
+		System.out.println(iterator.next());
+			
+		}
+
+		
+		
+	}	
+	public static void sirali_ekle( LinkedList<String> gidilecekyerler,String yeni )
+	{
+		ListIterator<String> iterator=gidilecekyerler.listIterator();	
+		while(iterator.hasNext())
+		{
+			int karsilastir=iterator.next().compareTo(yeni);
+			
+			if (karsilastir==0)
+			{
+				
+				System.out.println(" listedeki elamanlar zaten esit");
+				return;
+			}
+			else if(karsilastir>0)
+			{
+				iterator.previous();
+				iterator.add(yeni);
+				return;
+				
+				
+			}
+			else if(karsilastir<0)
+			{
+				
+				
+				
+			}
+			
+		}
+		iterator.add(yeni);
+		
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		LinkedList<String> gidilecekyerler =new LinkedList<String>(); // linked listlerin tanýmlanmasý ve method cagirma cagrýlan methodlarýn ozelligi aynýddýr
+
+	
+		
+	/*	gidilecekyerler.add("istanbul");
+		gidilecekyerler.add("avrupa");
+		gidilecekyerler.add("amerika");
+		gidilecekyerler.add("asya");
+		listeyibastýr(gidilecekyerler);
+		System.out.println("            ***********************");
+
+		gidilecekyerler.add(4,"afrika"); //eleman ekleme arraylist te ki ozelliklerin aynýsý
+		
+		listeyibastýr(gidilecekyerler);*/
+		sirali_ekle(gidilecekyerler, "market");
+		sirali_ekle(gidilecekyerler, "kafe");
+		sirali_ekle(gidilecekyerler, "okul");
+		listeyibastýr(gidilecekyerler);
+		
+	}
+
+
+}

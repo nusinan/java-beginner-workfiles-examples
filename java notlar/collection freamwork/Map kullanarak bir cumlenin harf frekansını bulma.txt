@@ -1,0 +1,45 @@
+
+package harffrekansi;
+
+import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeMap;
+
+public class HarfFrekansi {
+
+    
+    public static void main(String[] args) {
+        
+        Scanner scan= new Scanner(System.in);
+        
+        String cumle=scan.nextLine();
+        
+        Map<Character,Integer> frekans =new TreeMap<Character,Integer>();
+        
+        for( int i=0; i<cumle.length();i++){
+        
+        char c =cumle.charAt(i);  // c ye o anki harfi atadýk
+        
+        if(frekans.containsKey(c)){   // frekansýn icerisinde c karakterinin bulunup bulunmadýgýný kontrol ettik
+        
+           frekans.replace(c,frekans.get(c)+1); // bulunma durumuna gore frekansýn int degerinii bir arttýrdýk
+        }
+        else {
+        
+        frekans.put(c,1); // bulunmuyorsa frekans kaki o harfi1 den baslatýp donguyu devam ettirdik
+        
+        }
+        
+        }
+        
+        for(Map.Entry<Character,Integer> entry : frekans.entrySet()){   // map lere ozel olan entry ile map in degerlerini ekrana bastýrdýk
+        
+            System.out.println(" Karakter "+ entry.getKey()+ " kadar "+ entry.getValue()+ " geciyor.......");
+        
+        }
+        
+        
+        
+    }
+    
+}

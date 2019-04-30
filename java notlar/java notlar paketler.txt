@@ -1,0 +1,4 @@
+javada paketlerin en buyul amacý isim karýsýklýgýný onlemek javada bir cok kutuphane otomatik olarak gelmektedir ve bunlar ayrý ayrý pakettedirler paketlerin icerisindeki class lar 
+ayný isimde olamaz cunu java kabul etmez  ayný isimde oldugu icin javada gelen class lar ayný isimlerde olabilmektedir veya biz cok buyuk projeler yazdýgýmýzda istemesek te ayný isimde
+ class lar ve methodlar yazma durumunda kalabiliriz bunun icin javada paketler kullanýlmaktadýr mesela Scanner class ýný java.util paketinde import etmekteyiz belkide Scanner adýn da diger paketlerde 
+baska sýnýflarda vardýr 

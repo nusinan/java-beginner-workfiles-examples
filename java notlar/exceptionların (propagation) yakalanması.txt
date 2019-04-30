@@ -1,0 +1,60 @@
+exception propagation ic ice olan bir methodda veya dongude en dipdeki methodun veya islemin exception olusturmasý durumunda kendisini
+cagiran bir üstteki methoda vetya isleme exception unu gonderirir bu islem ic ice methodlarýn veya islemlerin son buldugu noktada biter
+
+exceptionlar kendisini bir üstteki methoda gonderdigi icin stacler gibi o methodlarda exception u try catch ile handlin yapabiliriz
+
+
+
+
+
+
+public class Main {
+    
+    public static void ucuncufonksiyon()
+    {
+        
+     
+    int a =12/0;                                      //  try cath burada da yapýlabilir
+       
+    
+    }
+    
+    public static void ikinicifonksiyon(){
+    
+                                                       //  try cath burada da yapýlabilir
+           ucuncufonksiyon();
+       
+    
+    
+    }
+    
+    public static void birincifonksiyon(){
+              try{
+           ikinicifonksiyon();
+        }
+                                                      // try cath i burada yaptýk
+        catch(ArithmeticException e){
+        
+            System.out.println(" boyle bir islem yapýlamaz");
+        
+        }
+    
+    
+    }
+    
+    public static void main(String [] args)
+    {
+       birincifonksiyon();                           //  try cath burada da yapýlabilir
+       
+    
+    }
+     
+        
+       
+        
+    }
+
+
+
+
+

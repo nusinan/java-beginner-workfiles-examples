@@ -1,0 +1,58 @@
+static olmayan inner classlar  bu 
+inner class lar bir class ýn icerisinde bir class olustmaktýr ayni inner ic ice class lar dýr bu class larýn tek farkký cagrýlma seklidir assagidaki ornekte oldugu gibi
+                                                                              
+     class 1
+public class Mathemat {  
+	public class faktoriel{
+		
+		public void fak(int x)
+		{
+			int fak=1;
+			for(int i=1;i<x;i++)
+			{
+				
+				fak*=i;
+				
+			}
+			System.out.println(" faktoriyel : "+ fak);
+			
+			
+		}                                                                         // olusturulma sekli
+		
+		public class alan
+		{
+			public void karealan(int kenar) {
+				
+				System.out.println(" kare alan ="+ kenar*kenar);
+				
+			}
+			
+		}
+		
+		
+		
+		
+	}
+	 
+}
+class 2
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+		Mathemat.faktoriel fakt=new Mathemat().new faktoriel(); // tanýmlanma sekli
+		
+		fakt.fak(20);
+        
+		
+
+
+	}
+
+}
+
+
+
+

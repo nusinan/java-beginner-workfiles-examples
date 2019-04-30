@@ -1,0 +1,73 @@
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+public class Main {
+    
+    public static void main(String [] args){
+        
+        FileInputStream fis=null;
+        try {
+            fis=new FileInputStream("dosya.txt");
+            try {
+                String s="";                // dosyanýn belli boldesindeki string i yazdýrmak icin yapýlmasý gereken
+                int deger;                  
+                int say =0;
+                fis.skip(6);               //  txt dosyamýz da her satýr bir indise denk geldigi icin  6 indis atladýk
+                while((deger= fis.read())!=-1){  
+                    s+=(char) deger;
+                say++;
+                  if(say==10){                // sayýmýzýn degeri 10 olunca break ile donguyu durudrduk
+                  
+                  break;                    // not void methodlarda sadece return yazarak deger dondermeden   methodu yazdýrabiliriz
+                  }
+                   
+                }
+                 System.out.println("dosyanýn atlanýlan yerinden itibaren yazan deger 10 karakter  :"+ s);
+                
+              
+             //   while((deger=fis.read())!=-1){   // fis.read bize 0 ve 1 ler den olusan byte codelar  donderdigi icin bu kodlarý deger adýnda bir int degiskeneatadýk
+                
+             //   s+= (char)deger;            // byte code larýmýzý char a cevirdik ve char (karakterleriimzi ) string  dizisine atadýk;
+                    
+                
+            //}
+               // System.out.println(" dosya icerigi "+ s);  // 
+                 //fis.skip(6);
+                 //System.out.println((char)fis.read());
+                //System.out.println(" birinci karakter " +(char)fis.read());
+                //System.out.println(" ikinci karakter " +(char)fis.read());
+                //System.out.println(" ucuncu karakter " +(char)fis.read());
+            } catch (IOException ex) {
+                System.out.println("dosya okunurken hata olustu");
+            }
+            
+        } catch (FileNotFoundException ex) {
+            System.out.println(" file buunamadý");
+        }
+        
+        finally{ 
+        
+            try {
+                if(fis!=null){        
+                fis.close();
+                }
+                
+            } catch (IOException ex) {
+                System.out.println(" dosya kapatýlýrken bir hata olustu...");
+            }
+        
+        
+        }
+                
+    
+    
+    
+    }
+    
+}
+s

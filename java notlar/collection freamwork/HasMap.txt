@@ -1,0 +1,52 @@
+HashMap class ı Collection  inteface inden ayrı olarak yer almaktadır
+HasMap in emel ozelligi key ve value adında iki degisken alarak verilen value ye 
+bir key e atayarak esitlemis olur ve o keyin aynısından birdaha olusturamayız yani olusturdugumuz key i bir daha 
+olusturamayız
+
+    /*
+    HashMap Sınıfı
+    
+    1. Değerleri Key(Anahtar) ve Value(Değer) olarak depolar. Her key'e karşılık
+    gelen bir tane değer bulunur.
+    2. Bir anahtar sadece bir kez varolabilir. Ancak bir değer birden fazla olabilir.
+    3. Elementleri tıpkı HashSet gibi ekleme sırasına göre depolamaz. (HashSet gibi)
+    
+    
+    
+    */
+
+
+package hashmap;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Hashmap {
+
+    public static void main(String[] args) {
+    
+        
+      HashMap<Integer,String> hashmap=new HashMap<Integer,String>();  
+      
+      hashmap.put(10,"java");   // HashMap e deger eklerken add methodu nu kullanamayız cınku key ve value olarak iki  tane degisken girmemiz gerekiyor
+                                // add methodu yerine map ler de put methodu vardır
+      hashmap.put(11,"c++");
+      hashmap.put(0,"php");
+      hashmap.put(2, "go");
+      hashmap.put(0, "python");
+     
+        System.out.println(hashmap);  // Hasmap icerisindeki tum degerleri ekrana bastırırken referans ın adını yazmamız yeterli
+        System.out.println(hashmap.get(10)); //HasMap in icerisndeki bir degeri alir ken ise  o mapm in anahtarini gondermemiz yeterlidir
+         System.out.println(hashmap.get(100));
+         
+         
+      for(Map.Entry<Integer,String> entry : hashmap.entrySet()) // mapleri for each dongusunde tanımlamak icin entry seti kullanarak yandaki  gibi kullanmalıyız
+      {
+      
+          System.out.println("anahtar : "+ entry.getKey()+ "*************> degeri :"+ entry.getValue());
+      }
+        
+        
+    }
+    
+}

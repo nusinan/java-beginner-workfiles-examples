@@ -1,0 +1,107 @@
+
+package player;
+
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+
+public class Player {
+    private String isim;
+    private int Id;
+    public Player(String isim,int Id){
+    
+    this.isim=isim;
+    this.Id=Id;
+    
+    }
+ @Override    // toString methodu bir objeyi direk olarak  Stringe ceviren method tur  return ile yazýlý olan yer sout icersinde hehangi bir objeyi donderemeyiz 
+              // dondersek bile bize @fsdfnl gibi sacma salak ifadeler donderir bunlarýn olmamasý return yerine dondurmesini istedimiz degeri gireriz ve bize
+              // o degeri donderir
+ 
+    public String toString() {   
+        return  " |||| " + Id +" isim" + isim+ "///";  //To change body of generated methods, choose Tools | Templates.
+        
+        
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.isim);
+        hash = 17 * hash + this.Id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Player other = (Player) obj;
+        if (this.Id != other.Id) {
+            return false;
+        }
+        if (!Objects.equals(this.isim, other.isim)) {
+            return false;
+        }
+        return true;
+    }
+
+   
+ 
+    
+    
+    
+    
+    public static void main(String[] args) {
+        // TODO code application logic here
+           Set<Player> hashset =new HashSet<Player>();
+    	Player player =new Player (" numan ",6);
+    	Player player1 = new Player ("mustafa",8);
+    	Player player2 =new Player ("mustafa",8);
+    	Player player3 =new Player ("mehmet",10);
+        Player player4 =new Player ("num",18);
+    
+    hashset.add(player);
+    hashset.add(player1);  /// burada player1 ve player2  ayný objeler olduklarý halse ekrana iki defa bastýrýldýlar cunku biz onlarý 
+                           // programda equels degeri tanýmlý olan String ten almadýk   kendi olusturdumuz player objedesinden  aldýk
+                            // player objesi programda tanýmlý degildir. player objesinin equels ini programda tanýmlý yapmak icin  obje ilel ilgili islemlerimizi
+                            //yaptýktan sonra  saga yýklayýp equels ve hashcode methodumuzu override edererk  objelerin Set interfa inin kuralýna gore benzersiz 
+                            //sýralayabiliriz
+    hashset.add(player2);
+    hashset.add(player3);
+    
+    for(Player p : hashset){
+       
+        System.out.println(p);
+    
+    }
+  
+    
+    
+   /*     Set<String> hashset= new HashSet<String>();
+        hashset.add("java");
+        hashset.add("python");
+        hashset.add(" c++");
+        hashset.add(" go");
+         hashset.add(" go"); // burada  "go " yu ikinci defa yazdýrmamasýnýn nedeni bu deger illk olustugunda hash te depolanýyor  aynýsý tekrardan listelelmek 
+                             // icin gonderdigimizde  bulundugu packet icerisinde program  equels methodu ile karsýlastýryor aynýsý bulunuyorsa eklemiyor 
+                             // bulunmuyorsa yeni degeri eklemiyor
+                
+                for (String s: hashset){
+                
+                    System.out.println(s);
+                }*/
+    
+    
+    }
+    
+    
+}

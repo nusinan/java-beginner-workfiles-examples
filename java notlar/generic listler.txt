@@ -1,0 +1,43 @@
+turden bagýmsýz islem yaptýgýmýz class lar veya methodlardý  rgeneric class lar birden farklý ccesit diziler yazdýgýmýz zaman String int Char veya referans objesine obje donderen claslardan olusan diziler olusturdugumuz
+zaman bu dizileri paremetre donderen bir methodla ekrana yazdýrmak istedigimizde her birisi icin ayrý ayrý class tanýmlayýp methodunun donderen parametresinin ayný turden yazmak zorundayýz yoksa 
+program hata veririr örnegin integer deger donderen bir dizi paarametresine String bir dizi gonderemiz onun icin deger donderen methodlarýn parametreleri ayný olmak zorunda bu bizi kucuk projelerde zorlamaz ama 
+buyuk projelerde ornegin 200  300 tip obje parametresinden veya diger donus degerlerinden olusan dizilerimiz oldugu zaman hepsi icin ayrý ayrý methodlar yazmak ve bu methodlarýn karýstýrmamak icinde ayrý ayrý sýnýflar yazmak
+zorunda kalabilme durumundayýz  ama javada bunun tek bir method da yapabilmemiz mumkun bu da generic listlerle olmakta dýr
+generic class larda 
+
+public class YazdirmaSinifi<E> {    // buradaki E class ýn tipini belirtmektedir  int String obje char ...vs
+	
+     public void yazdir(E [] dizi )   //  buradaki E parametrenin tipini belirtmektedir
+        {
+		
+		for( E atama : dizi)   //  e dizini tipi 
+		{
+			System.out.println( atama);
+			
+		}	
+	}
+}     not burada E nin icerisine her turlu tipte dizi veya deger donderen her turlu obje parametresi yazýlabilir
+
+
+
+
+
+  public static <E extends Aday> E birinci (E e1,E e2)  burada  E yi direk olarak yazamayýz cunku E cok genel birseydir program onun icerisinie hersey yazýlabilr mantýgýnda anlar .
+                                                         kod blogunun icerisini saglamasý lazýmdýr onun kod blogunun icerisini saglayan 
+                                                        Aday class ýný extend ettik cunku puanhesapla adýnda method sadece onda oldugu icin yaptýk
+	  {
+		  
+		  if (e1.puanhesapla()>e2.puanhesapla())
+		  {
+			  
+			  return e1;
+			  
+		  }
+		  else 
+		  {
+			  
+			  return e2;
+			  
+		  }	
+	  }
+	}

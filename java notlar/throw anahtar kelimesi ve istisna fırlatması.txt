@@ -1,0 +1,40 @@
+throw anahtar kelimesi ile istedigimiz zaman kendi Exception   larýmýzý fýrlatabiliriz
+
+
+import java.util.Scanner;
+
+
+public class Main {
+    
+     public static void mekanagiris(int yas)
+        {
+        if(yas<18 )
+           throw new ArithmeticException();    // yasin 18 den kucuk olmasý durumundan kullanýcýya AritmatikException hatasýný gondermesýný soyledik
+        
+        }
+        
+    
+    public static void main(String [] args){
+    
+    
+        int yas;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("yasinizi giriniz");
+        yas=scan.nextInt();
+        
+        
+        try{
+        mekanagiris(yas);        // gonderdimiz hatayý yanlý olmasý durumunda  try ile yakalamasýný sagladýk
+        }
+        
+        catch(ArithmeticException e){    // hata türünü yazdýk
+        
+            System.out.println(" yasiniz 18 den kücük oldugu icin mekana giremessiniz");  // hata icin geri donut olusturduk
+        
+        }
+        
+       
+        
+    }
+
+}

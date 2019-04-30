@@ -1,0 +1,132 @@
+Reentrant lock lar threadleri syncronized etmenin diger bir yontemi 
+
+****************************************************************************************** ReentrantLockOrnegi ***************************************************************************************
+
+import java.util.Scanner;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+public class ReentrantLockOrnegi {
+
+    private int say = 0;
+    private Lock lock = new ReentrantLock();    //  lock sýnýfýndan bir reantered lock objesi olusturduk
+    private Condition condition = lock.newCondition();   //condition sýnýfýndan bir lock objesi olusturduk
+    
+    public void artir(){
+        for (int i = 0 ;  i < 10000 ; i++) {
+            
+            say++;
+        }
+      
+    }
+    public void thread1Fonksiyonu(){
+        
+        lock.lock();                    // bir lock olusturarak thread 1 in  calsýmasýný sagladýk anahtarý teslim aldý
+        System.out.println("Thread 1 Çalýþýyor...");
+        System.out.println("Thread 1 Uyandýrýlmayý Bekliyor....");       
+        
+        try {
+            condition.await();               //  thread bir calsýrken anahtarý teslim ederek thread 2 tarafýndan uyandýrýlana kadar  uyumasýný  await methodu ile bildirdik  wait methodu ile ayný isi yapar
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ReentrantLockOrnegi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Thread 1 Uyandýrýldý ve Ýþlemine Devam Ediyor...."); //  thread bir uyandýrýldý ve islemlerini  yapmaya unlock olana kadar devam etti
+        artir();
+       
+        
+        lock.unlock();
+     
+    }
+    public void thread2Fonksiyonu(){
+        try {
+            Thread.sleep(1000);       // thread1 in ilk once baslamsý icin thread iki yi baslamadan 1 saniye uyuttuk
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ReentrantLockOrnegi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scanner scanner = new Scanner(System.in);   
+        
+        
+        lock.lock();                                //  ilk baslayan thread1 suan uyuyup anahtarý býraktýgý icin bostaki anahtarý(lock u) suan thread 2 aldlý
+        System.out.println("Thread 2 Çalýþýyor....");
+        
+        artir();                                   // arttýrma islemlerini yaptý
+        System.out.println("Devam etmek için bir tuþa basýn...");
+        scanner.nextLine();                       // bir sayý girerek thread2 nin devam etmesin sagladýk
+        condition.signal();                      // condition signal diyerek thread1 uyardýk   notify meethodu ile ayný isi yapar
+        System.out.println("Thread 1'i Uyandýrdým.Ben gidiyorum..."); 
+       
+        lock.unlock();                            // isi biten thread2 anahtarý býrakarak thread1 bostaki anahtarý alarak islemlerini devam ettirdi
+       
+    }
+    public void threadOver(){
+        System.out.println("Say deðiþkenin deðeri : " + say);
+  
+    }
+}
+****************************************************************************************   main      *******************************************************************************
+
+import java.util.Scanner;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+public class ReentrantLockOrnegi {
+
+    private int say = 0;
+    private Lock lock = new ReentrantLock();    //  lock sýnýfýndan bir reantered lock objesi olusturduk
+    private Condition condition = lock.newCondition();   //condition sýnýfýndan bir lock objesi olusturduk
+    
+    public void artir(){
+        for (int i = 0 ;  i < 10000 ; i++) {
+            
+            say++;
+        }
+      
+    }
+    public void thread1Fonksiyonu(){
+        
+        lock.lock();                    // bir lock olusturarak thread 1 in  calsýmasýný sagladýk 
+        System.out.println("Thread 1 Çalýþýyor...");
+        System.out.println("Thread 1 Uyandýrýlmayý Bekliyor....");       
+        
+        try {
+            condition.await();               //  thread bir calsýrken anahtarý teslim ederek thread 2 tarafýndan uyandýrýlana kadar  uyumasýný  await methodu ile bildirdik
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ReentrantLockOrnegi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Thread 1 Uyandýrýldý ve Ýþlemine Devam Ediyor...."); //  thread bir uyandýrýldý ve islemlerini  yapmaya unlock olana kadar devam etti
+        artir();
+       
+        
+        lock.unlock();
+     
+    }
+    public void thread2Fonksiyonu(){
+        try {
+            Thread.sleep(1000);       // thread1 in ilk once baslamsý icin thread iki yi baslamadan 1 saniye uyuttuk
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ReentrantLockOrnegi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scanner scanner = new Scanner(System.in);   
+        
+        
+        lock.lock();                                //  ilk baslayan thread1 suan uyuyup anahtarý býraktýgý icin bostaki anahtarý(lock u) suan thread 2 aldlý
+        System.out.println("Thread 2 Çalýþýyor....");
+        
+        artir();                                   // arttýrma islemlerini yaptý
+        System.out.println("Devam etmek için bir tuþa basýn...");
+        scanner.nextLine();                       // bir sayý girerek thread2 nin devam etmesin sagladýk
+        condition.signal();                      // condition signal diyerek thread1 uyardýk
+        System.out.println("Thread 1'i Uyandýrdým.Ben gidiyorum..."); 
+       
+        lock.unlock();                            // isi biten thread2 anahtarý býrakarak thread1 bostaki anahtarý alarak islemlerini devam ettirdi
+       
+    }
+    public void threadOver(){
+        System.out.println("Say deðiþkenin deðeri : " + say);
+  
+    }
+}

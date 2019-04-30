@@ -1,0 +1,31 @@
+java IO dosyalardan ve degisk kaynaklardan input almak ve degisik kaynaklara output yazmak icin bir API olarak bilinir
+ýnput ve output islemlerini hýzlandýrmak icin java streamleri kullanýlýr  java IO API sinin icinde onlarcca sýnýf vardýr
+
+
+Stream 
+verilerin input ve output yoluyla  java projelerine aktýgý bir veri dizisidir javada Streamler verilerin byte yani(  0 1 )olarak aktýgý yerdir 
+
+daha onceden kullandýgýmýz ama bilmedigimiz streamler  System.out   ,   System.in   , System.err  gibi hatalar bayt kod a donusup kullanýlmaktadýr
+java da bunlar hazýr kullanmamýz icin olusturulmus  3 tane hazýr Stream dir
+
+
+OutputStream
+java uygulamalarý bir dosyaya , bir sokete ,veya baglanmýs bir aygýta veriyi Stream halinde yazmak( byte halinde 1 ve 0 lar ile) için 
+OutputStream abstract class ( soyut sýnýf)  ýndan tureyen bir alt sýnýfý kullanýr
+
+write() methodu : belli bir  byte dizisini veya tek bir byte ý hedefe yazar
+
+flush()methodu  :herhangi bir bufferlanmýs veri varsa bu method saysesinde hemen hedefe yazmasýný soylemis oluruz
+
+close() methodu : OutputStream i kapatýr
+
+
+InputStream 
+java uygulamlarý bir dosyadan ,soketten ,veya baglammýs bir aygýttan veriyi veriyi Stream halinde okumak icin (byte halinde 0 ve 1 ) 
+InputStream abstract class ýndan türeyen bir altsýnýftýr
+
+read()  methodu :kaynaktan bir sonraki byte  ý okurokuyacak herhangi bir byte yoksa -1 deger doner
+
+avaiable() methodu :okunabilecek byte sayisini doner
+
+close() methodu input stream i kapatýr

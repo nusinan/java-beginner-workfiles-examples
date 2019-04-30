@@ -1,0 +1,190 @@
+***************************** yolcu ******************************************
+
+import java.util.Scanner;
+class SiyasiException extends Exception {    // clasýmýzýn exceptionn oldugunu belirtiyoruz ama Exceptiion 
+                                               //  ý extend ettigimiz icin checked bir excetion oluyor
+
+    @Override
+    public void printStackTrace() {        // exception ýn vermesini istedigimiz hatayý belilrttik
+        System.out.println("Siyasi Yasaðýnýz Bulunuyor...");
+
+    }
+   
+}
+class VizeException extends Exception {    // clasýmýzýn exceptionn oldugunu belirtiyoruz ama Exceptiion
+	                                       //  ý extend ettigimiz icin checked bir excetion oluyor
+    @Override
+    public void printStackTrace() {          // exception ýn vermesini istedigimiz hatayý belilrttik
+        System.out.println("Gideceðiniz Vizeniz Bulunmamaktadýr...");
+    }
+  
+    
+}
+class HarcException extends Exception {  // clasýmýzýn exceptionn oldugunu belirtiyoruz ama Exceptiion
+	                                     //  ý extend ettigimiz icin checked bir excetion oluyor
+    @Override
+    public void printStackTrace() {    // exception ýn vermesini istedigimiz hatayý belilrttik
+
+        System.out.println("Lütfen yurtdýþý harcýný tam yatýrýn...");
+    }
+    
+    
+    
+}
+
+public class Yolcu{
+    
+    private int harc;
+    private boolean siyasiYasak;
+    private boolean vizeDurumu;
+    
+    public Yolcu() {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Yatýrdýðýnýz Harç Bedeli : ");
+        this.harc = scanner.nextInt();
+        scanner.nextLine();
+        
+        System.out.print("Herhangi bir siyasi yasaðýnýz bulunuyor mu(evet ya da hayýr) ? ");
+        
+        String cevap = scanner.nextLine();
+        
+        if (cevap.equals("evet")) {
+            
+            this.siyasiYasak = true;
+        } 
+        else {
+            this.siyasiYasak = false;
+        }
+        System.out.print("Vizeniz bulunuyor mu ? (evet ya da hayýr)");
+        
+        String cevap2 = scanner.nextLine();
+        
+        if (cevap2.equals("evet") ){
+            this.vizeDurumu = true;
+            
+        }
+        else {
+            this.vizeDurumu = false;
+        }
+        
+        
+        
+        
+        
+    }
+
+    
+    public void yurtdisiHarciKontrol() throws HarcException { // exception dan extend edildigi
+        if (this.harc < 15) {                                 // icin checked bir exception
+            
+           throw new HarcException();  // kendi exception umuzu gonderdik
+           
+        }
+        else {
+            System.out.println("Yurtdýþý harcý iþlemi tamam!");
+          
+        }
+    }
+
+    
+    public void siyasiYasakKontrol() throws SiyasiException {  // exception dan extend edildigi 
+    	                                                       // icin checked bir exception
+        if (this.siyasiYasak == true) {
+            throw new SiyasiException();  // kendi exception umuzu gonderdik
+            
+           
+        }
+        else {
+            System.out.println("Siyasi yasaðýnýz bulunmuyor...");
+           
+        }
+    }
+
+    
+    public void vizeDurumuKontrol() throws VizeException {// exception dan extend edildigi  
+        if (this.vizeDurumu == true) {                    // icin checked bir exception
+            System.out.println("Vize iþlemleri tamam!");
+            
+        } 
+        else {                       // kendi exception umuzu gonderdik
+            throw new VizeException();
+            
+            
+        }
+
+    }
+    
+    
+}
+*********************************************Main******************************************************
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+        
+        System.out.println("Sabiha Gökçen Havalimanýna Hoþgeldiniz....");
+        
+        String sartlar = "Yurtdýþý Çýkýþ Kurallarý...\n"
+                         +"Herhangi bir siyasi yasaðýnýzýn bulunmamasý gerekiyor...\n"
+                         +"15 Tl harç bedelinizi tam olarak yatýrmanýz gerekiyor...\n"
+                         +"Gideceðiniz ülkeye vizenizin bulunmasý gerekiyor...";
+        String message = "Yurtdýþý þartlarýndan hepsini saðlamanýz gerekiyor";
+        
+        
+        while(true) {
+            System.out.println("*******************************************");
+            System.out.println(sartlar);
+            System.out.println("*******************************************");
+            
+            
+            Yolcu yolcu = new Yolcu();
+            
+            System.out.println("Harç Bedeli Kontrol Ediliyor...");
+            
+            Thread.sleep(3000);
+            
+            try {
+                yolcu.yurtdisiHarciKontrol();  //exception hatasý verebilecek methodu try catch gonderdik
+            } catch (HarcException ex) {
+                ex.printStackTrace();        // exceptin olmasý durumunda hatamýzý geri cagýrdýk
+                continue;                    //  continue diyerek donguyu basa aldýk
+                
+                
+            }
+            
+            
+            System.out.println("Siyasi Yasak Kontrol Ediliyor...");
+            Thread.sleep(3000);
+            
+            try {                         //exception hatasý verebilecek methodu try catch gonderdik
+                yolcu.siyasiYasakKontrol();
+            } catch (SiyasiException ex) {
+                ex.printStackTrace();    // exceptin olmasý durumunda hatamýzý geri cagýrdýk
+                continue;               //  continue diyerek donguyu basa aldýk
+                
+            }
+            
+            
+            System.out.println("Vize Durumu Kontrol Ediliyor...");
+            Thread.sleep(3000);
+            
+            try {                         //exception hatasý verebilecek methodu try catch gonderdik
+                yolcu.vizeDurumuKontrol();
+            } catch (VizeException ex) {  // exceptin olmasý durumunda hatamýzý geri cagýrdýk
+               ex.printStackTrace();
+               continue;                 //  continue diyerek donguyu basa aldýk
+            }
+            
+            System.out.println("Ýþlemleriniz Tamam ! Yurtdýþýna çýkabilirsiniz...");
+            break;
+            
+            
+        }
+        
+        
+    }
+}

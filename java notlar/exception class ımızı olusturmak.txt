@@ -1,0 +1,60 @@
+exception sýnýfýmýzý olustururken exception adýný class ýn adýndan alacagý icin class ýn adýný exception vermek istedigimiz ismi vermeliyiz
+ class ýmýzýa exception turumuzu(AritmeticException) extend etmeliyiz  .  
+
+override edilmesi gereken methodlarý override etmeli ve constructure umuzu düzenlemeliyiz assagidaki gibi
+
+
+************************  main ***************************************
+
+import java.util.Scanner;
+public class Main {
+    
+    public static void mekankontrol(int yas){
+    if(yas<18){
+    
+    throw new InvalidEdgeAcception("invalid age");
+    }
+    
+    else{
+    
+        System.out.println("Mekana hosgeldiniz");  
+    }
+
+    }
+
+    public static void main(String [] args)
+    {
+      Scanner scan =new Scanner(System.in);
+        System.out.println("yasinizi giriniz");
+        int yas=scan.nextInt();
+        
+        try{
+        mekankontrol(yas);
+        }
+        
+        catch(InvalidEdgeAcception e){
+    
+         e.printStackTrace();
+    }
+
+    }
+           
+    }
+
+************************************Invalidedgeexception*************************************
+
+
+public class InvalidEdgeAcception extends ArithmeticException {
+   
+    public InvalidEdgeAcception(String message)
+    {
+
+    super(message);
+
+    }
+    @Override
+    public void printStackTrace() {
+        System.out.println("bu bir InvalidEdgeAcception hatasýdýr");
+    }
+  
+}

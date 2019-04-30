@@ -1,0 +1,12 @@
+final anahtar kelimesi programda degiskenlerde sadece bir defa deger verebiliyoruz bir daha veremiyoruz deger verdigimiz zaman ya tanýmlandýgý zaman vermeliyiz yada constructor
+ icerisinde vermeliz bunlarýn dýsarisinda bir alanda deger verdigimizde program bize hata verir final anahtar kelimesini programda degismesiniz istemedimiz bir degerin olmasýný istedigimizde
+kullanýrýz  constructure icerisinde tanýmlarken final degiskenimize artan degerler gonderebiliriz bu degerler her obje olustugunda o objeyen atanýr ve final oldugu 
+icin bir daha asla degistirilemez
+
+final anahtar kelimesini parametrelerde de kullanabiliriz parametre olarak verdimiz degerin hicbir zaman degismesini istemiyorsak parametreyi yazdýgýmýz yerin yanýna final yazarsak 
+degiskenin final olmasýný saglarýz ve bir daha degistilmez
+
+final methodlar 
+biz methodumuzun override edilmesini istemiyordak final anahtar kelimsini kullanmalýyýz
+
+veya class ýmýzýn override edilmesini istemiyorsak  class ýmýz icin final anahtar kelimesini kullanmalýyýz

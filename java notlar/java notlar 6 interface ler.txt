@@ -1,0 +1,9 @@
+java da multiply inheritence (coklu lkalýtým ) yoktur onun yerine interfacelar vardýr   extend edilmis bir class ý  
+ bir daha extend edemeyiz yani baska üst class lardan  ozelliklik alýpp kullanamayýz ama onun yerine interfacelere implementasion yapabiliriz
+ implemend edilen interface e tanýmladýgýmýz ozellikleri alabiliriz boylelikle javada coklu kalýtým yapmýs oluruz
+interfacelerde sadece methodlarý tanýmlayabiliriz degisken asla tanýmlayamayýz tanýmladýgýmýz methodlarýn kod blogu yoktur methodlarýn kod blocklarýný 
+override ettigimizde doldururuz bir interface den asla obje tanýmlayamayýz ama interface adýyla obje olusturmus bir class a referans olunabilir
+bir class a birden fazla interface de implementasion yapýlabilir
+interface icinde methodlarý olusturuken public veya private kullanmadan da yazabiliriz cunku interface den obje olusturamadýgýmýz icin public veya private yapmamýzýn 
+bir onemi yoktur
+

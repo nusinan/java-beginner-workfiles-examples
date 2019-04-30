@@ -1,0 +1,121 @@
+serializesion bir dosyaya String lerimizi byte  a donusturup kaydettigimiz gibi objeleride dosyaya kaydedebiliriz ve bunu  serializetion ile yaparýz
+bu isleme objelerini serilestirilmesi serializesion adý verilmektedir bu objeleri dosyadan okuma islemine ise deserializetion  adý verilmektedir 
+
+
+serialization un avantajlarý objelerin anlýk durumlarýný daha sonra kullanmak icin kaydetmek istiyorsak serializesition kullanabiliriz
+örnegin oyunlarda kaldýgýmýz yerden devam etmek istiyorsak serializetion mantýgýný kullanarak oyunun o anki ozelliklerini daha sonra kullanmak 
+icin kaydedip daha sonra kullanabiliriz
+
+2 platform arasýndaki dosyalarýn veri alýsvarisini objeler  uzerinden gerceklestirmek istiyorsak  serialization mantýgýný kullanabiliriz
+
+en buyuk avantajý bir objeyi olusturmak cok uzun suruyorsa  ve daha sonra bu objeyi kullanmak istiyorsak bu objeyi bir daha olusturmak yerine 
+bu dosyayý serilestirelek daha sonra kullanabiliriz
+
+               *******************************************   ogrenci   **************************************************
+
+
+
+import java.awt.BorderLayout;
+import java.io.Serializable;
+
+  
+public class ogrenci implements Serializable{
+    private static final long serialVersionUID=2000;  // serialilazion olusturdugumuz bir dosyada ekleme cýkarma yaptýgýmýzda searilize
+                                                      // olmus objeden farklý olacagi icin  hata olusma olasýlýgý yuksek olacak bu hatalarý programýn bildirmesini 
+                                                      // istiyorsak seariael verison eklemeliyiz ve her yeni birsey ekleyip cikartttýgýmýzda version degeri degistirmeliyiz
+                                                       // olusaabilecek hatalara karsý bildirim olusturmasý icin
+            
+    private String isim;
+    private int id;
+    private String bolum;
+    private int deger;                              // eski objeden farklý olarak bir degisken ekledik biz bu degiskeni serialversion ile bildirmessek program bize bir 
+                                                    // hata donderebilir onun icin serialversion ile bildirmeliyiz ve yeni yaptýgýmýz degisikliklerde version degerini 
+                                                    // degistirmeliyiz
+
+    public ogrenci(String isim, int id, String bolum) {
+        this.isim = isim;
+        this.id = id;
+        this.bolum = bolum;
+    }
+
+    @Override
+    public String toString() {
+        String bilgiler =" ogrenci ismi        :" +isim+       // objeyi cagirdigimizda String dondermek icin to String kullandýk
+                          "\n ogrenci numarasý :" +id+
+                          "\n  ogrenci bolum   :" + bolum;
+        
+       return  bilgiler;
+    }
+
+}
+
+                    **********************************   objeyiyaz  ****************************************
+
+
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class Objeyiyaz {
+    
+    public static void main (String [] args )
+    {
+     try (ObjectOutputStream out =new ObjectOutputStream (new FileOutputStream("dosya.bin"))){ // serialization tanýmlayabilecegimiz bir dosya  olusturduk
+         
+         ogrenci ogrenci1 = new ogrenci(" mustafa murat",1234,"bilgisayar muhendisi");   // objeleri olusturduk 
+         ogrenci ogrenci2 = new ogrenci("numant",3574,"yazýlým muhendisi");             
+         out.writeObject(ogrenci1);     // objeleri serialization referansýna gonderdik
+         out.writeObject(ogrenci2); 
+ 
+    }   catch (FileNotFoundException ex) {
+            System.out.println(" dosya bulunamadý...");
+        } catch (IOException ex) {
+            System.out.println(" dosya acýlýrken IO exception hatasý olustu...");
+        }
+    
+    
+    }  
+    
+}
+
+
+               ********************************************   objeyi oku   ***************************************************
+
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+public class ObjeyiOku {
+    
+    public static void main(String [] args){
+    
+        try(ObjectInputStream in= new ObjectInputStream( new FileInputStream("dosya.bin"))){  // searilezetion depolanmýs  bir dosyayý cagirdýk
+            ogrenci ogrenci1 =(ogrenci)in.readObject();         //dosya icerisindeki searilize olmus okutarak ekrana yazdýrdýk
+            ogrenci ogrenci2 =(ogrenci)in.readObject();
+            System.out.println("*************************************");
+            System.out.println(ogrenci1);
+            System.out.println("*************************************");
+            System.out.println(ogrenci2);
+    
+        } catch (FileNotFoundException ex) {
+            System.out.println(" dosya bulunamadý...");
+        } catch (IOException ex) {
+            System.out.println(" IOException hatasý olustu...");
+        } catch (ClassNotFoundException ex) {
+            System.out.println(" sýnýf bulunamadý");
+        }
+
+    }
+    
+}
+
+

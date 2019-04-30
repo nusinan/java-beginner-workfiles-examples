@@ -1,0 +1,53 @@
+Exceptionlar checked ve unchecked olmak üzere iki tür exception dondermektedirler checked exceptionlarda hatalar program 
+tarafýndan bildirilmektedirler  ama unchecked exceptionlarda programcý hatanýn kontrolunu kendisi tespit etmek zorundadýr
+
+Checked exceptionlar IOException ve Sqel Exception dir
+
+Unchecked exceptionlar  runtime exceptionlardýr program calýsmadan kontrol edilemezler bunlar aritmatik exception nulpointer exception..... vs dir
+throw la kendi exceptionumuzu donderirken bu runtime olan unchecked exceptionlarý direk olarak donderebiliriz
+
+
+
+ama checkedlarý throwla donderdigimiz zaman program bunlarýn checked oldugunu bildigi icin bunlarý ayriyetten programa bildirmeliyiz bildirirken 
+throws la methodun parametreyerinin sag tarafýna s yazmalýyýz donderdigiimz exceptionýn adýyla  birlikte assagýda oldugu gibi
+
+
+
+import java.io.IOException;
+import java.util.Scanner;
+
+
+public class Main {
+    
+     public static void mekanagiris(int yas )throws IOException {
+        if(yas<18 )
+           throw new IOException();    // yasin 18 den kucuk olmasý durumundan kullanýcýya AritmatikException hatasýný gondermesýný soyledik
+        
+        }
+        
+    
+    public static void main(String [] args){
+    
+    
+        int yas;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("yasinizi giriniz");
+        yas=scan.nextInt();
+        
+        
+        try{
+        mekanagiris(yas);        // gonderdimiz hatayý yanlý olmasý durumunda  try ile yakalamasýný sagladýk try cath yazmadan  main yanýnda tanýmlayabiliriz
+                                 // bu hata olustugu zaman soldaki hata lambazsý yanýna týklayýp yazdýrtabiliriz
+        }
+        
+        catch(IOException e){    // hata türünü yazdýk
+        
+            System.out.println(" yasiniz 18 den kücük oldugu icin mekana giremessiniz");  // hata icin geri donut olusturduk
+        
+        }
+        
+       
+        
+    }
+
+}

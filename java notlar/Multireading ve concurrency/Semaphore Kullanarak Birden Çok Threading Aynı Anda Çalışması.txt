@@ -1,0 +1,100 @@
+semaphore u olan thredlerin belli bir zamanda sadece belirttigimiz adetteki thredi calýrýr methodun  isi bittiginde calsanalar býrakýlarak  kalan semapheri olan threadlerin belirtilen semaphore adedi
+miktarýyla calsýsmaya devam edip tum threadler  bitene kadar devam etmesi olayýdýdr 
+
+****************************************************************************************  semaphoreornegi    ***********************************************************************************************
+
+import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class SemaphoreOrnegi {
+    
+    private Semaphore sem = new Semaphore(4); // semaphore class ýný tanýmladýk ve ayný anda 5 tane methodun calýsacagýný bildirdik
+    
+    public void threadFonksiyonu(int id) {
+        
+        try {                       
+            sem.acquire();          // olusturdugumuz methodun icerisinde sem.equire sýrasýna girerek calsýmasýný bildirdik
+        } catch (InterruptedException ex) {
+            Logger.getLogger(SemaphoreOrnegi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        System.out.println("Thread Baþlýyor... ID : " + id );
+        
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(SemaphoreOrnegi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Thread Çýkýyor.... ID : " + id);
+        
+        sem.release();              // en son semaphore olan thread in  methodunun isi bittgi zaman methodu i serbest býrakarak semaphore u  olan diger  thread i almasýný bildidrdik
+                                   // bu yolla tum threadler belli bir sýra ile ayný anda calsýtýrdýk
+        
+    }
+    
+}
+**************************************************************************************  main  *******************************************************************************************************
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+public class Main {
+    public static void main(String[] args) {
+        SemaphoreOrnegi semaphore = new SemaphoreOrnegi();
+        
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                semaphore.threadFonksiyonu(1);
+                
+            }
+        });
+         Thread thread2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                semaphore.threadFonksiyonu(2);
+                
+            }
+        });
+          Thread thread3 = new Thread(new Runnable() {
+            @Override
+            public void run() {                              //  ayný anda calýsan 5 tane thread tanýmladýk
+                semaphore.threadFonksiyonu(3);
+                
+            }
+        });
+           Thread thread4 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                semaphore.threadFonksiyonu(4); 
+                
+            }
+        });
+            Thread thread5 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                semaphore.threadFonksiyonu(5);
+                
+            }
+        });
+            
+        thread1.start();
+        thread2.start();
+        thread3.start();
+        thread4.start();
+        thread5.start();
+        
+        
+        try {
+            thread1.join();
+            thread2.join();
+            thread3.join();
+            thread4.join();
+            thread5.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }
+}

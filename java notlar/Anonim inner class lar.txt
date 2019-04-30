@@ -1,0 +1,103 @@
+annonin inner class lar Main methodu icerisinde tanýmlanamayan methodlarý tanýmlayýp objelerini icerikleri ile beraber olusturulmasýdýr interfaceler ve abstract class lar gibi 
+abstract classlarda ve interfaceler de obje olusturamayýz ama bun yontem sayesinde ikisinde de obse olusturmak mümkün ama olustururken icierigi ile birlikte olusturmak sartýyla
+
+interface  
+
+public interface Alan {
+
+	
+	
+	public void d_alan(int k1,int k2);
+}
+
+abstract class
+
+
+
+public abstract class ogrenci {
+	private String isim;
+	private int number;
+	
+	
+	
+	public ogrenci(String isim, int number) {
+		super();
+		this.isim = isim;
+		this.number = number;
+	}
+
+	public void sinavagir() {
+		
+		System.out.println( " suan sýnavdayým");
+		
+	}
+	
+	public abstract void ders_calis();
+
+	public String getIsim() {
+		return isim;
+	}
+
+	public void setIsim(String isim) {
+		this.isim = isim;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+}
+main methodumuz
+
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+	
+		Alan alan = new Alan() {
+			
+			public void d_alan(int k1,int k2)
+			{
+				
+				
+				System.out.println(" dikdortgenin alaný : "+ k1*k2);
+				
+			}
+			
+	
+		};
+		
+		ogrenci ogr =new ogrenci("numan",357) {
+
+			@Override
+			public void ders_calis() {
+				// TODO Auto-generated method stub
+				
+				System.out.println(" suan ders calisiyorum");
+				
+			}
+
+			@Override
+			public void sinavagir() {
+				// TODO Auto-generated method stub
+				super.sinavagir();
+				System.out.println();
+				System.out.println(getIsim()+ " simdi snavda ");
+			}
+			
+			
+		};
+		alan.d_alan(6, 10);
+		ogr.ders_calis();
+		ogr.sinavagir();
+
+	}
+
+}
+
+

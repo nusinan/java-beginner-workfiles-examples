@@ -1,0 +1,52 @@
+
+package filebufreadwrite;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class FileBufReadWrite {
+
+  
+    public static void main(String[] args) {
+       
+        
+       // try( Scanner scanner =new Scanner( new FileReader("dosya.txt"))){// Filereader dosyadantek seferde tüm dosyalarý okuma yerine tek tek karakter
+                                                                        // okuyup yazdýrýp gelmektedir
+         try( Scanner scanner =new Scanner( new BufferedReader(new  FileReader("dosya.txt")))){//
+                                                // BufferedReader ile cok buyuk dosyalarý toplu halde okutmak icin kullanýlabilir 
+                                                //kulllanýmý da yukarýda yukarýdaki gibidir
+            while(scanner.hasNextLine() ){
+             
+                //System.out.println(" okunan dosya :" + scanner.nextLine());
+                String kisibilgisi=scanner.nextLine();
+                
+                String [] array =kisibilgisi.split(",");  
+                
+                if(array[1].equals("uogrenci"));
+                System.out.println(" ogrenci bilgisi : "+ kisibilgisi);
+                
+            } 
+        
+        
+        } catch (FileNotFoundException ex) {
+            System.out.println(" dosya IO hatasý verdi");
+        }
+         
+         try(BufferedWriter write = new BufferedWriter(new  FileWriter("dosya.txt",true))){ // dosyaya toplu yazý yazdýrýrtken halde 
+                                                                                             //islem  yaptýrýrtken kullanýlan dosyadýr
+          write.write("numan sinan,yazýlým muhendisi\n");
+         
+         } catch (IOException ex) {
+             System.out.println(" dosya acýlýrken hata olustu");
+        }
+       
+    }
+    
+}

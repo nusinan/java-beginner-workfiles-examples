@@ -1,0 +1,52 @@
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+public class Main {
+    
+    
+    public static void main(String [] args) // Filewriter ýn kullanýlmasý byte code la calýsan FileInputStream in veya FileOutputstream  in gereksiz oldugu
+                                            //  anlamýna gelmez cunku onlar string olmayan dosyalarda ornegin mp3 mp4 vb islemleri yaparken bu islemler 
+                                            // string icermedikleri icin bunlarý bytcode larla donusturerek kullanacagýz
+           
+    {
+         
+        FileWriter writer =null; // FileWriter ile direk olarak dosyalarýmýzý scream (byte code a donusturmeden) ekrana yazdýrabiliriz
+                                //  referans ile objeyi( dosya cagýrmayý ) beraber cagirmammamizýn nedeni ikisini birlikte cagirdigimiz zaman 
+                                //  ve try catch a aldýgýmýz zaman  referans ve objemiz code blog unun icerisinden iken dýsaridan cagýrýlamayacaktý
+                                // referansýmýzý dýsarýdan cagýrýrken mesela stream i sonlatndýrmak icin finall de referansýmýzý cagirdigimiz zaman 
+                                // referansýmýz try code blogunun icerisinde oolsugu icin gozuk meyecek ti ama dýsarýda tanimladigimizda diger code bloglarýndan 
+                                // cagirabiliriz
+         
+        
+        try {
+            writer =new FileWriter("dosya.txt");  // dosyamýzý cagirdik
+            writer.write("numan sinan\n");         // dosyamýzýn icerisine string elemanlarýmýzý yazdýrdýk
+            writer.write("mustafa sinan\n");
+            writer.write("mehmet sinan\n"); 
+          
+            
+        } catch (IOException ex) {
+            System.out.println(" dosya acýlýrken IO Exception olustu");
+        }
+        
+        finally{
+         
+            if(writer!= null){    // writer referansýmýzýn  dolu olma durumuna gore kapatýlmasý kapatýlmasýný bildirdik
+            
+                try {
+                    writer.close();
+                } catch (IOException ex) {
+                    System.out.println("dosya kapatýlýrken bir hata olustu...");
+                }
+            
+            }
+      
+        }
+
+    }
+}

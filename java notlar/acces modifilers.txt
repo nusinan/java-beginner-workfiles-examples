@@ -1,0 +1,38 @@
+    /*
+    Access Modifiers- Eriþim Belirleyiciler
+ 		 
+    Eriþim Belirleyiciler 2 düzeyde eriþimi belirlerler.
+ 		
+    Sýnýf Düzeyinde Eriþim Belirleyiciler
+ 		
+    public : Bir class eðer public yazýlmýþsa bu classa paketin içindeki ve paketin dýþýndaki
+    tüm classlar tarafýndan eriþilir.
+ 		
+    default: default eriþim belirleyici kullanmamak anlamýna gelir. 
+    Eðer bir class hiçbir eriþim belirleyici kullanmadan yazýlmýþsa, bu class'a sadece ayný paketin içindeki 
+    classlar eriþebilir. Paketin dýþýndaki classlar bu class'a eriþemez.
+ 		
+    *** protected, private eriþim belirleyiciler classlar için kullanýlamazlar.
+ 		
+ 		
+    Metod ve Özellik Düzeyinde Eriþim Belirleyiciler
+ 		
+ 		
+    public: Eðer bir metod veya özellik(class member veya alan) public olarak tanýmlanmýþsa , 
+    bu alana paketin içindeki ve dýþýndaki tüm classlar eriþebilir. 
+    Ancak tabii ki bu alanýn içinde bulunduðu classýn da eriþilebilir olmasý gerekir.
+
+    default: Eðer bir metod veya özellik tanýmlanýrken hiçbir eriþim belirleyici kullanýlmamýþsa (default),
+    bu alana sadece kendi paketindeki classlar eriþebilir.
+ 		
+    protected : Eðer bir metod veya özellik(class member veya alan) protected olarak tanýmlanmýþsa, 
+    bu alana ayný paketin içindeki diðer classlar tarafýndan eriþilebilir. Paketin dýþýndaki classlar ise 
+    sadece ve sadece bu alanýn bulunduðu classýn bir alt classýysa eriþebilir.
+ 		
+    private: Eðer bir alan private olarak tanýmlanmýþsa bu alana sadece kendi classý eriþebilir.
+ 		
+ 		
+    Daha önceden öðrendiðimiz gibi bir metodun içinde tanýmlanmýþ deðiþkenler lokal deðiþken olarak tanýmlanýrlar.Yani,
+    bu deðiþkenlere diðer metodlardan ve classlardan eriþilemez. Bundan dolayý bu deðiþkenlere access modifier eklenemez.
+
+ */

@@ -1,0 +1,44 @@
+
+public class Main {
+    
+    public static void main(String [] args){
+    
+    
+      // int a = 20/0;     verecegi hata aritmetik acception hatasýdýr                  // try catch ile programýmýzýn hatalarýný bulup 
+                                                                                       // programýmýzýn durmasýný engelliyoruz
+      // int [] a= {1,2,3,4,5,};
+       // System.out.println(a[8]);
+       // System.out.println("burasý calýsýyor");
+       
+       try{        // hata verecek kodu bu blog a yazarýz
+       int a=20/0;
+       
+       
+       }
+       
+       catch(ArithmeticException e){    // hata tütünü ise buraya yazarýz   hatanýn türetigi Exception kelimesi de yazýlabilir  try icerisine birden fazla 
+                                        // hata yazýp hatalarýn ortak noktasý olan Exceptions ý   hatalar icin ortak olarak yazdýrabiliriz
+       
+           System.out.println("bir sayi sýfýra bolunemez");
+       }
+       
+       try{
+       int[] a ={1,2,3,4,5};
+           System.out.println(a[8]);
+                                                                      // bir try icerisinde yazýlýlan birden fazla hata icin ayrý ayrý catch yazabiliriz
+                                                                      // ama catch leri yazarken ozelden genele dogru bir yazým yapmalýyýz
+                                                                      // yani ilk once hatalarýn catc ini   en sona exception u yazmalýyýz
+                                                                      // 
+       
+       }
+       
+       catch(ArrayIndexOutOfBoundsException e){      
+       
+           System.out.println("berrayin boyunu astýnýz......");
+         //   e.printStackTrace(); hatanýýn  turnu ekrana yazdýrýr
+       }
+                                                             
+    }
+    
+ 
+}

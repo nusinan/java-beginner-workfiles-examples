@@ -1,0 +1,114 @@
+wait ve notify methodlarý synronized da anahtar larý yani (lock) larý belli kosullara gore  bu lock larý brakmamýzý saglayan  ve daha sonra bu locklarý elde etmemizi saglayan methodlardýr
+
+
+*************************************************************************************  Producer consumer **************************************************************************************
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class ProducerConsumer {
+    Random random = new Random();
+    Object lock =  new Object();
+    Queue<Integer> queue = new LinkedList<Integer>();
+    private int limit = 10;
+ 
+    public void produce() {
+        
+        while (true) {
+            
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ProducerConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            synchronized(lock) {                       burada bir anahtar olusturduk
+                
+                if (queue.size() == limit) {          
+                                           
+                    try {
+                        lock.wait();   // eger kuyrukta 10 tane eleman varsa  anahtarý býrakmasýný bildiriyoruz ve consume anahtarý alýyor
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(ProducerConsumer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                Integer value = random.nextInt(100);
+                queue.offer(value);                    //  dongu yýkarýda ki methoda girmediyse  kuyruga eleman ekliyor
+                System.out.println("Producer Üretiyor : " + value);
+                lock.notify();                     // consumer  ekleyen bir anahtar varsa anahtarýn devam etmesini bildiriyor uretilenleri tuketmesi icin
+                
+            }
+      
+        }
+     
+    }
+    public void consume(){
+        
+        while (true){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ProducerConsumer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            synchronized(lock) {          
+                
+                if (queue.size() == 0) {     
+                    
+                    try {
+                        lock.wait();   //  eger kuyrukta hic eleman yoksa tukedim olmadýgý icin anahtarý býrakmasýný bildiriyoruz
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(ProducerConsumer.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                Integer value =  queue.poll();             // kuyrukta eleman alýp tuketim yaptýrýyoruz
+                System.out.println("Consumer Tüketiyor : " + value);
+                System.out.println("Queue Size : " + queue.size());
+                lock.notify();          // eger producer bekleyen bir anahtar varsa anahtarýn devam etmesini bildiriyoruz
+              
+            }
+            
+        }
+    
+    } 
+}
+************************************************************************************    main   **************************************************************************************************
+
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+public class Main {
+    public static void main(String[] args) {
+          ProducerConsumer pc = new ProducerConsumer();
+    
+    Thread producer = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            pc.produce();
+        }
+    });
+    Thread consumer = new Thread(new Runnable() {           //  ayný anda uretim ve tuketimi olmasý icin threadlerin icerisinde tanýmladýk
+        @Override
+        public void run() {
+            pc.consume();
+        }
+    });
+
+    producer.start();                                // threadleri baslattýk
+    consumer.start();
+    
+        try {
+            producer.join();                 // main methodunun thread i calsýmadan once consumer ve producer  methodunun bitmesini beklemesiini bildirdik
+            consumer.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    
+    }  
+}
+

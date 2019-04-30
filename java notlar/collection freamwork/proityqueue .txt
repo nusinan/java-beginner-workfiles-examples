@@ -1,0 +1,94 @@
+
+import java.util.PriorityQueue;
+import java.util.Queue;
+class Player implements  Comparable<Player>{  // oncelik sýrasýný belirlemek icin comparable interface ini implement ettik
+  private String isim;
+  private int id;
+
+    public Player(String isim, int id) {
+        this.isim = isim;
+        this.id = id;
+    }
+
+    @Override
+    public int compareTo(Player player) {
+
+        if (this.id < player.id) {
+            return 1;
+                                                  // kücük olan sayýyý oncelikli hale getirmek icin yandaki islemi yaptýk
+        }
+        else if (this.id > player.id) {
+            return -1;
+        }
+        return 0;
+
+    }
+
+    @Override
+    public String toString() {                                         // sout icerisinde donderdigimiz objenin string dondermesi icin 
+                                                                        // tostring kullandýk
+        return "Player{" + "isim=" + isim + ", id=" + id + '}';
+    }
+  
+  
+    
+    
+    
+    
+}
+
+public class Main {
+    
+    public static void main(String[] args) {
+      /*
+    Queue Interface ve PriorityQueue Sýnýfý
+
+    PriorityQueue normal Queue mantýðý gibi davranmaz. Elemanlar öncelik sýralarýna göre yüksek öncelik kazanýp
+    (
+    Integerlarda en yüksek öncelik en küçük sayýda, en düþük öncelik  en büyük sayýdadýr.
+    Stringlerde en yüksek öncelik alfabetik olarak sözlükte en önce gelen stringte, 
+    en düþük öncelik  alfabetik olarak sözlükte en son gelen stringtedir.
+
+    )
+
+    kuyrukta önlere geçer (Týpký Hastanedeki Acil Servisler Gibi). 
+
+    add veya offer() metodlarý --------> Kuyruða eleman ekler.(Önceden gördüðümüz özellikleri taþýrlar.)
+    clear() metodu --------> Kuyruðu Temizler.
+    contains(Object o) ------> o objesi kuyruðun içindeyse true, deðilse false döner.
+    peek() ------> Kuyruðun baþýndaki elemaný döner.Eðer kuyruk boþsa null referans döner.
+    poll() -----> Kuyruðun baþýndaki elemaný çýkartýr ve deðer olarak döner. Eðer kuyruk boþsa null referans döner.
+    size()------> Kuyruðun içindeki eleman sayýsýný döner.
+        */
+      Queue<Player> queue = new PriorityQueue<Player>();
+      
+      queue.offer(new Player("Murat", 5));
+      queue.offer(new Player("Mehmet", 1));
+      queue.offer(new Player("Oðuz",100));
+      
+      while (!queue.isEmpty()) {
+          
+          System.out.println("Eleman Çýkarýlýyor : " + queue.poll());
+      }
+      
+     /* queue.offer(5);
+      queue.offer(1);
+      queue.offer(2);
+      queue.offer(100);
+      
+        System.out.println(queue.peek());
+        System.out.println(queue.contains(100));   //  100 kuyrugýun icerisinde oldugu icin true donderecek
+        
+      while (!queue.isEmpty()) {
+          System.out.println("Eleman Çýkarýlýyor : " + queue.poll());  // queue.poll()  de obje donderdigimiz objeyi to stringle ayarlamýstýk
+           
+      }
+      /*for (Integer i : queue) {
+          System.out.println(i);
+          
+      }*/
+     
+      
+        
+    }
+}

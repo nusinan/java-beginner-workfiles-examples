@@ -1,0 +1,40 @@
+ic ice class lardan olusan inner classlarda  ic ise olusan  icteki class ýn static olarak olusmasýdýr  burada da normal class lardan tek farký yazým seklidir cunku static yaparak bellekte 
+direk olustugu icin yazým farklýlýkllarý olusmaktadýr  assagidaki ornekte oldugu gibis
+
+
+
+class 1
+
+public class Mathemat {
+	
+	
+	public static class Alan{
+		
+		public static void daire_alan(int alan) {
+			
+			
+			System.out.println(" dairenin alaný : "+ 4*Math.PI*alan*alan);
+			
+		}
+		
+		
+	}
+
+}
+class 2
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+	   Mathemat.Alan alan=new Mathemat.Alan();    // obje ile static class ýn olusturulmasý
+	   
+	   alan.daire_alan(6);
+	   
+	   Mathemat.Alan.daire_alan(7);  // static oldugu icin obje olusturmadan direk olarak sýnýf ile olusturulabilmektedirler burada methodunda ulasabilmemiz icin static olmasý lazýmdýr
+
+	}
+
+}

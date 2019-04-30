@@ -1,0 +1,66 @@
+
+import java.util.ArrayList;
+
+public class Main {
+
+	public static void main(String[] args) {     // ArrayList ler programdan bir sınıf tarafından olusturulmustur biz arryleri bu sınıftan   ArrayList<String> arrayname; diyerek  referansını
+		//  	ArrayList<String> arrylist= new ArrayList<String>(); diyerek bojeyi olustururuz ArrayList imizin adına arrylist. yazdıgımızdan ArrayList kutuphanesinden
+		//bir cok method tanımlanmıstır kullanmamız icin en cok kullanılanlardan bazıları assagıda vardır
+		// TODO Auto-generated method stub
+
+		 /*
+      		  Wrapper Class 
+        
+      		  boolean ------> Boolean
+      		  char ---------> Character
+     		  byte ---------> Byte
+     		  short --------> Short
+       		  int ----------> Integer
+        	  long ---------> Long
+       		  float --------> Float
+      		  double -------> Double
+        
+        
+       		 */ Arraylist te String in harici diger degiskenleri kullanmak istiyorsak yukarıda karsilik gelen halleri ile 
+		// kullanmalıyız Autoboxing ve unboxing kavramı ile ilgili dir
+		
+
+
+
+		ArrayList<String> arrylist= new ArrayList<String>();
+		
+		arrylist.add("alexis faw");
+		arrylist.add("rachael star");
+		arrylist.add("leo lean");
+		
+		System.out.println( arrylist.get(0));
+		System.out.println( arrylist.get(1));
+		System.out.println( arrylist.get(2));
+		arrylist.set(2, "numan sinan "); // arrylist in degistirmek istedigimiz index sayısını guncellememimizi saglıyor
+		System.out.println( arrylist.get(2));
+		arrylist.remove(2); 
+		//arrylist.remove(2); veya index koyulabilir
+		for(int i=0;i<arrylist.size();i++)
+		{
+			System.out.println(arrylist.get(i)); 
+			
+		}
+		System.out.println( arrylist.indexOf("alexis faw")); // index sayısını bulmamızı saglıyor
+		// eger bbiz buraya var olmayan bir String yazarsak -1 gonderir biz de bunun la ilgili 
+		// bizde bununla ilgili islem yapmak istiyorsak if ile 0 dan kucuk olup olmamama durumunu kontrol ederiz
+		
+		yazdir(arrylist);
+	}
+	public static void yazdir(ArrayList<String> arryl)
+	{
+		for(int i=0;i<arryl.size();i++)
+		{
+			
+			
+			System.out.println((i+1)+"n ci element   " + arryl.get(i)+" dir");
+		}
+		
+		
+	}
+
+}

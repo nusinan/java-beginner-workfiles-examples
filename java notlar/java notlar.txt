@@ -1,0 +1,61 @@
+public yerine private kullanilmasinin nedeni public te objemize veya deðidkenimize her turlu sýnýftan herhangi bir kýsýtlama 
+olmadan erisilebilmektedir erisilebiliyordu ama bazý durumlarda bazý belli kýs ama ýtlamalarýn olmasýný isteriz bu kýsýtlamalara ornek verecek olursak 
+100 kisilik bir listeden birisini girilen kisiyi bulmak istiyoruz ama kullanýcý kullanýcý int deger donderen bir degiskene bu 100 
+kisiyi cok rahat bir sekilde bulabilir ama 100 den sonrasýný da girmek isterse program hata verir cünküü biz programda 100 kisi 
+tanýmladik 101 .ci kisi yok  bunun gibi durumlarda methodumuzu veya degiskenimizi private yapýp istedigimiz kýsaltmalarý
+yaptýrabiliriz
+private sadece degiskenlerde olur bundan dolayý getter ve setter sadece degiskenler icin olusturulabilir.
+
+
+
+constructor ise clasýömmýzýn icinde tanýmladýgýmýz degiskenlere varsayýlan degerler atamk icin kullanýlýr
+bu sekilde yaparak tek tek objeyle degiskeni cagýrýp deger atamasý yapmýyoruz  tanýmladýgýmýz calstaki objeyi olusturuken 
+paremere oolarak verdigimiz degiskenlerin degerlerini yazarak atam yapýyoruz ekrana yazdýrmak icin cagirma yaparkenen private kullandýysak yine get ve set 
+metodlarýyla objelerle birlikte cagirarak ekrana bastýrabiliriz
+
+encapsulation   : bir sýnýfýn ozellilklerin baska bir sýnýftan saklamak pirvate yaparak saklanabilir
+ 1-constructur seklinde parametreyle elemanlarý cagýrarak tum elemanlarý doldurma zorunlulugu getirmektedir  eger constructure kullanmassak eleamlarýn degerlerini manuel olarak doldurmak zorunda kalýrdýk 
+ve elle doldurdugumuz degiskendegerlerinden doldurmayý unuttugumuz degiskenler olabilirdi boyle oluncada code umuzun çalýsmmamasý gibi durumþar ortaya cýkabilirdi
+ 2-degiskenlerimizin ismini degistirdimiz zaman diger class lardaki isiminide degistirmek zorunda kalmaktayýz eger construcor ile cagýrmassak ama constructure ile cagýrma yaptýgýmýzda sadece 
+degiskenlerin isimlerini degistirmemiz yeterli
+ 3- degiskenleri deger atamasý yaptýrýrken belli kýsýtlamalar yaptýrmak isteriz mesela 20 kisilik bir  sýnýftan  her hangi birini kullanýcýdan girmesini istedigimzde kullanýcý eger 20 den buyuk bir sayi girerse 
+bu giridgi sayýyý constructure icinde if(edger>){  sout( "  20 den buyuk deger giremessiniz diye hata mesajý gonderbiliriz")}  veya degiskene varsayýlan deger atayarak aranýn secili olmasýný saglayabiliriz
+
+inheritence kalýtým
+inheritense ust sýnýftan alt sýnýfa dogru sýralama iselmi yapýlarak olusturulur hayvan daaha sonra kedi veya kopek gibi
+alt sýnýfa hayvaný extends ederek alt sýnýfa baglamýs oluruzdiger alt sýnýflardaki constracturlar super (parametreleri yazýlarak )
+hayvan ana klasýna baglanýr ayný sey metodlar icinde gecerli super.method adý yapýldýgýnda   alt sýnýftaki calsa ust sýnýftaki 
+clasa methodunu atayarak cagýrdýgýnda direk calýsmasýna olanak saglar
+
+
+composition  birlestirme bunu objelerin referans objelerinin    bir genel class ta degisken gibi cagþrþlarak o clasýn main clasýndan parcalara    anaclass.ekeran.ekranýac()
+seklinde cagýrýlarak program olusturulabilir 
+
+not : bir class icinde baska bir tanedaha class olusturabiliriz ama yeni olusturdumuz class ýn public degeri olamaz
+
+pollimorfizim (kalýtým inheritence)
+
+kalýtým basitce ust sýnýfýn ortak ozellliklerini alt sýnýflarýn almasýdýr hayvan > kedi =kopek .. gibi alt sýnýflarýn hayvandaki ozelliklerini kullanmasýdýr bunu yapabilimek icin alt sýnýflarý hayvan sýnýfýna extend ederek 
+baglarýz hayvan sýnýfýnýn alt sýnýflrýnýn almasýný istedigiz ozelliklerini consructur yardýmýyla super class a atayabiliriz extra ozelliklerde kendimiz ekleyebiliriz ve hayvan klasýnýn methodlarýný overrride edebiliriz  
+ondada ayný ozellikleri atamak istiyorsak super().mothod adý   iel super class ý cagýrabiliriz  ama polimorfizm de asýl onemli olan bu methodlarýn cýktýsýný almaya calýstýgýmýzda hepiziz hepsi icin ayrý ayrý nesneler olusturmamýz
+gerektiginiz dusunebiliriz ,boylede yapýlabilir hayvan icin hayvan objesi kedi icin kedi objesi,kopek icin kopek objesi,bunun haricinde hayvan clasýnýnýn referansýna kedi objesini gonderebililriz veya kopek objesini gonderebiliriz
+Hayvan hay=new Kedi(" name",5,3 ) seklinde boyle bu sekilde yapmamýz bir tur nobje ile haepsini cagýrabilmem ozelligimizin olmasýndandýr 
+bu ozelligide main icerisinde veya baska zbir sekilde  bir method olusturdumuzda ve o methoda parametre olarak hayvan referansný gonderdigimizde o obje ile alt sýnýflarý tum methodlarýný cagýrabilme ozelligini saglamsýndan bizi kolaylýk 
+saglar alt sýnýflarý hayvan sýnýfýna extends edip baglamasaydýk  tum objeler icin ayrý ayrý o  referans parametresi gonderen methodlar olusturmak durumunda kalacaktýk  bu sekilde bir cok kod yazma durumunda kalacaktýk
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+

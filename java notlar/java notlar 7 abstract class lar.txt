@@ -1,0 +1,9 @@
+abstract class lar inheritance class lar la aynýdýr ama onlardan farklý oarak kod bloklarý blunmaz   
+yani bir abstract class ta degisken tanýmlayabiliriz constructur olusturabiliriz private public olusturabiliriz 
+normal methodlarda olusturabiliriz ama abstract method yaptýgýmýzda onun kod blogunu doldurmayýz yani o kod blogu ile ilgili hic bir islem 
+olmasýný istemeyiz nedeni bir ornekle aciklarsak sekil adýnda genel bir class olusturdugumuzu dusunelim altýnda da daire cember dikdortgen 
+vb class larýn oldugunu dusunlim ve hepsinde alan hesaplamak istedigimizi varsayarsak hepsi icin ayrý ayrý sekiller clasýnda tanýmladigimiz bir alan hesapla methoduyla 
+hesaplaplabiliriz ama ana methodun icinde alaný belli bir sekil olmadýgý icin onun alanýný  hesaplayamayýz yani oranýn kod blogunun bos olamsýný isteriz
+yani abstrac class lar abstract methodlarý olusturmamýzý saglarken abstract methodlarda kod blogu olmayan methodlarý olusturmamýzý saglamaktadýr
+
+abstract class lardan objeler  olusturamayýz ama abstract class larýn referanslarý alt sýnýflara direk referans olabiliyor interfaceler gibi

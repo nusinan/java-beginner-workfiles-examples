@@ -1,0 +1,157 @@
+deathlock olusma olasýlýgý cok dusuk oldugu icin ileride olsusabilcek deathlock hatsýný onceden ongorebilmek cok zordur bu yuzden deathlock larýn programcý acýsýndan sýkýntýsý buyuktur
+deadloclarýn olusma sebebi thredlere ve isletim sistemine basglýdýr cunku deathlock olusabilmesi icin farklý threadlerin seynkronized oldugu zaman her thread in  bir anahtar alýp býrakmasý icin bosta bir thread 
+olmadýgý zaman yani hepsi var olmayan bostaki bir thread i bekledikleri icin  bir kitlenme yani deadtlock olusturmaktadýr
+
+****************************************************************************************  hesap   **************************************************************************************************
+
+public class Hesap {
+    private int bakiye = 10000;
+    
+    public void paraCek(int miktar) {
+        bakiye -= miktar;
+        
+    }
+    public void paraYatir(int miktar) {
+        bakiye += miktar;
+    }
+    public static void paraTransferi(Hesap hesap1,Hesap hesap2,int miktar) {    // para yatýma ve cekme islemlerini direk obje olusuturunca calsýtýrmak icicn conrtuctor icerisinde
+    	                                                                        // olusturdugumuz methodlarý calýstýrdýk
+        hesap1.paraCek(miktar);
+        hesap2.paraYatir(miktar);
+        
+    }
+
+    public int getBakiye() {
+        return bakiye;
+    }
+
+    public void setBakiye(int bakiye) {
+        this.bakiye = bakiye;
+    }
+}
+****************************************************************************************  deadlockornegi  **********************************************************************************************
+
+import java.util.Random;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+
+public class DeadlockOrnegi {
+    private Hesap hesap1 = new Hesap();
+    private Hesap hesap2 = new Hesap();    //hesap class ýmýzdan objelerimizi cagýrdýk
+    private Random random = new Random();
+    
+    private Lock lock1 = new ReentrantLock();      //    threadleri synronize etmek icin reenteredlock tan iki  obje olusuturduk
+    
+    private Lock lock2 = new ReentrantLock();
+    
+    
+    public void LocklariKontrolEt(Lock a,Lock b) {   // programýn deadlock olusuturmamasý icin bir method tanýmladýk yani program calsýtýgýnda  iki tane calsýmasý icin 2 tane lock u da almasý 
+    	                                            // gereken ama bazen isletim sisteminden dolayý  threadlerin iksinin de bir lock alarak calsöalarý icin gerekli olan diger lock u alamak 
+    	                                            // icin birbirlerini beklemek durumunda kalmaktadýrlar yani birisinin calsýmasý icin en az biriniz lock unu býrakmasý gerekmektedir lock larý
+    	                                            // ellerindeki lock u býrakmsý icinde  islemin tamamlanmasýný beklemeye baslar ikisde baslamayan islemlerini bitiremedigi icin ve ellerindeki 
+    	                                             // lock u býrakamadýgý icin deadlock olusur
+    	                                            // deadlock olusmasýný onlemek icin thread in her iki lcok u da aldýgýndan emin olacagý bir method yazaar deadlock olusmasýný onledik
+        
+        boolean a_elde_edildi = false;
+        boolean b_elde_edildi = false;                     // her iki lock unda elinde olmadýgýný varsaydýk
+        
+        while(true) {
+            
+            a_elde_edildi = a.tryLock();                   // a ve b lock unu her ikisininde almayý denemesini sagladýk
+            b_elde_edildi = b.tryLock();
+            
+            if (a_elde_edildi == true && b_elde_edildi == true) { eger her iki lock u da program aldýysa   programý devam  return ederek programý devam etmesi bildirdik
+                
+                return;
+            }
+            if (a_elde_edildi == true) {
+                
+                a.unlock();                    //  yada locklardan sadece birini aldýgý zaman  dgier thread in lcok u alarak baslamsýný saglamak icin  aldýgý lcok u býrakmasýný soyledik
+            }
+            if (b_elde_edildi == true) {
+                b.unlock();
+            }
+            
+        }
+        
+        
+    }
+    
+    public void thread1Fonksiyonu(){
+        
+        LocklariKontrolEt(lock1, lock2);                 // ayný anda her iki lock u alana kadar methodun calsýmasýný soyledik
+        
+        
+        
+        for (int i = 0; i < 5000 ; i++) {
+            
+            Hesap.paraTransferi(hesap1, hesap2, random.nextInt(100));
+            
+        }                                           // methdou calýstýrdýk ve bittigi zaman lockþarý birakmasýný birdirdik
+        lock1.unlock();
+        lock2.unlock();
+      
+        
+    }
+    public void thread2Fonksiyonu(){
+        
+        LocklariKontrolEt(lock2, lock1);          // ayný anda her iki lock u alana kadar methodun calsýmasýný soyledik
+
+        for (int i = 0; i < 5000 ; i++) {
+            
+            Hesap.paraTransferi(hesap2, hesap1, random.nextInt(100));
+            
+        }
+        lock2.unlock();                     // methdou calýstýrdýk ve bittigi zaman lockþarý birakmasýný birdirdik
+        lock1.unlock();
+       
+       
+    }
+    public void threadOver(){
+        System.out.println("Hesap1 Bakiye : " + hesap1.getBakiye() + " Hesap2 Bakiye : " + hesap2.getBakiye());        //  en son olusan islemimizin sonucunu donderdik
+        
+        System.out.println("Toplam Bakiye : " + (hesap1.getBakiye() + hesap2.getBakiye()));
+        
+    }
+}
+*******************************************************************************************  main ***************************************************************************************
+
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+public class Main {
+    public static void main(String[] args) {
+          DeadlockOrnegi deadlock  = new DeadlockOrnegi();
+    
+    Thread thread1 = new Thread(new Runnable() {
+        @Override
+        public void run() {                 
+            deadlock.thread1Fonksiyonu();
+        }
+    });                                                 // her iki methodunda ayný anda calsýmasýný saglamak icin threadlerin icerisinde baslattýk
+     Thread thread2 = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            deadlock.thread2Fonksiyonu();
+        }
+    });
+    thread1.start();                          
+                                                    // threadlerimizi baslattýp methodlarýmýzýn ayný anda calýsmasýný sagladýk 
+    thread2.start();
+    
+        try {
+            thread1.join();
+            thread2.join();                      // main methoduna threadleirn islemleri bitene kadar beklemesini bildidrdik
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   
+    deadlock.threadOver();
+    }
+    
+  
+
+}

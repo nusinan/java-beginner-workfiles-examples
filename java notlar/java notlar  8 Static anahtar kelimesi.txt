@@ -1,0 +1,21 @@
+bir class icerisinde lusturdugumuz methodlar ve ozellikler(degiskenler) obje ye ait ozellikler olarak olusmaktadýr cunku bu ozellikleri sadece 
+objelerle birlikte cagýrabiliyoruz ama static ile olusturdugumuz ozellikler ve methodlar sýnýfa baglý ozellikler oldugu icin direk olarak bellekte
+olusmaktadýr ve sabit degerleri vardýr ve  sýnýf isimi ile dogrudan cagýrýlabilmektedir bunlar sýnýfa ait olduklarý icin sadece 1 defa olusmaktadýr  class icinde int bir eleman sayisi tanimlayip
+her obje olusturdugumuzda bu elaman sayisini 1 arttýrmak istiyorsak bunu constructor icerisinde yapabiliriz bu degiskeni bir obje ile cagirdigimiz zaman 
+degiskenin degerini sadece kendisi olustugu icin arttýracak yani ondan once kactana obje olusmus olursa olsun hisbirisini dikkte almayacakdegeri sabit olmadýgý icin olusturulan obje tarafýndan sýfýrdan olusturulacak
+ ama static olarak olusturdugumuz  degiskenhe robje icin  bellekte olustugu icin her obje olsutugunda bellekte ki degeri 
+sabit olan static(kendisinde islem yapýldiginda degisebilen ama her obje olustugunda objeye gore olusmabyan deger)
+ degiskenin degeri bir artacak ama static kullanmasaydýk her obje olustugu zaman farklý degerler olan sadece kendi degerlerini alacaklardý
+bir method u kendi class ýnýn ismiiyle normal olarak cagiramayiz cagirabilmemiz icin methodun class a baglý olarak olusmasý lazým yani bellekte direk olusmasi lazim onun icin static yaparak  methodu class a baglý yapar ve 
+cagirirsak methodu olusturabiliriz static bir methodun icerisinde  bir degiskenide normal olarak cagiramnayayiz cagirmamiz icin degiskenþn de static olmasi lazim 
+
+main methodu tanýmlý bir class ýn icerisinde olusturdugumuz bir methodu static yaparsak obje olusturmadan o class ýn icerisinde cagirabilriz bunun nedeni main methodu zaten icerisinde bulundugu  class ýn ozelliklerini  alabildigi icin 
+class ýn objesiyle veya ismiyle cagirmamadan da direk methodu cagirabiliriz
+
+main methodumuzu olusturur ken public static void main seklinde herzaman oljustururken static kullanmamýzýn nedeni  main methodu calismadan once bellekte bir yer olusmasi gerekmektedir bellekte olusmadan cagirdigimizda bu main methodumuz
+calýsma dolayýsýyla static kullanmamýzýn nedeni main methodumuzu bellekte olusturmaktýr.
+
+
+static anahtar kelimesi bir cok kutüphanede kullanýlmaktadir mesela Math.PI derken   PI yi Math class ýn dan  PI yi static olsugu icin direk class ismiyle alabilmekteyiz bu ve bunun gibi bir cok kutuphanede ve yerde  static anahtar kelimesi kullanýlmaktadýr
+
+

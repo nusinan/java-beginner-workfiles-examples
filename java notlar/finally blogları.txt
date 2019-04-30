@@ -1,0 +1,37 @@
+programda exception calýssada calýsmasada mutlaka calýsmasýný istedigimiz kodlar varsa bu kodlarý final blogumuz icerisine yazmalýyýz
+
+
+
+public class Main {
+    
+    public static void main(String [] args){
+    
+    
+     try{
+     int [] b ={1,2,3,4,5};                     // hata veren  bir ecdcdeption u cath icinde onun icin farklý bir hata verdik  hatayý bulamayýp hatanýn 
+                                                // devam etmesi icin hata anýný da hata olsada olmasada finally blogunun calýstýgýný gorebilmekteyizz
+                                             
+         System.out.println(b[9]);
+     
+     
+     
+     }
+     catch(ArithmeticException e)
+     {
+         System.out.println(" bir sayi sýfýra bolunemez");
+     }
+    
+ 
+            
+     finally{
+         System.out.println(" finally blogu calisiyor"  );
+     
+     }
+     
+        System.out.println("burasý calýsýsýyor");
+                                                             
+    }
+    
+ 
+}
+

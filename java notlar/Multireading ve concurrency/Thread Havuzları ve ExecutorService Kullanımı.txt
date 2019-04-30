@@ -1,0 +1,104 @@
+bizim buyuk projelerimizde 100 lerce binlerce thread imiz olabilir ve helpsi ayný anda calistýrdýmýz zaman threaslerinde kendisi stack olarak bellek olusutrduklarý zaman bellek asýrý yorulýp performans
+kaybý yasatabilir bu yuzden biza threadlerimizin belli adetler miktarý 5 er 5er veya 8er 8er veya 10 ar 10 ar calýsmasý isteyebiliriz bu islemide javada executer service ile yapabiliriz  bu yolla hem 
+code sayimiz azalýyor hem de  bellegimiz saýrý yukten kurtulmus oluyor
+
+*************************************************************************************  worker class *****************************************************************************************
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+public class Worker implements Runnable{
+    private String isim;
+    private int taskId;
+
+    public Worker(String isim, int taskId) {
+        this.isim = isim;
+        this.taskId = taskId;
+    }
+    
+    @Override
+    public void run() {
+        try {
+            System.out.println("Worker " + isim + " " + taskId + ". iþe baþladý..");
+            
+            
+            Thread.sleep(5000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Worker.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Worker " + isim + " " + taskId + ". iþi bitirdi..");          
+    } 
+}
+*******************************************************************************************    main  *******************************************************************************************
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
+public class Main {
+    public static void main(String[] args) {
+        
+        ExecutorService executor = Executors.newFixedThreadPool(3);  // executor service ile bir havuz olusuturduk ve bu havuzda ayný anda en fazla 3 tane  thread in calýsacagýný bildirdik
+        
+        for (int i = 1 ;  i <=5 ;i++){
+            
+            executor.submit(new Worker(String.valueOf(i), i));  //executorda objeye deger atamasý yaptýk
+            
+        }
+        
+        executor.shutdown();  // executor un islemi bittigi zaman kapatýlmasýný sagladýk
+        System.out.println("Bütün iþler teslim edildi...");
+        
+        try {
+            executor.awaitTermination(1, TimeUnit.DAYS);   // programa bu silemler yapýlýrken gecikme suresinin en fazla bir gun olabilecegini bildirdik
+          } catch (InterruptedException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+         System.out.println("Bütün iþler bitti...");   
+            
+            
+            /*Thread t1 = new Thread(new Worker("1", 1));
+            Thread t2 = new Thread(new Worker("2", 2));
+            Thread t3 = new Thread(new Worker("3", 3));
+            Thread t4 = new Thread(new Worker("4", 4));
+            Thread t5 = new Thread(new Worker("5", 5));
+            System.out.println("Bütün iþler teslim edildi...");
+            t1.start();
+            t2.start();
+            
+            try {
+            t1.join();
+            t2.join();
+            } catch (InterruptedException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            t3.start();
+            t4.start();
+            
+            try {
+            t3.join();
+            t4.join();
+            } catch (InterruptedException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            t5.start();
+            
+            try {
+            t5.join();
+            
+            } catch (InterruptedException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("Bütün iþler tamamlandý...");*/
+        
+    }
+    
+}
+
+
+
+
+

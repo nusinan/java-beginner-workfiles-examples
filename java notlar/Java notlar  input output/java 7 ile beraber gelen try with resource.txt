@@ -1,0 +1,40 @@
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+
+public class Main {
+    public static void main(String[] args) {
+        
+        try(FileWriter writer1 = new FileWriter("diller.txt")){  // javaya gelen bu ozellik saysesinde 
+        	                                                    // finally de close ile yaptýgýmýz kapatma islemini simdi otomatik 
+        	                                                   // olarak  java yapmaktadýr try icerisine istedigimiz kadar referans
+        	                                                  // objesi olusturabiliriz ama  noktalý virgulle ayýrarak yazarýz
+           Scanner scanner = new Scanner(System.in);
+           String dil;
+           
+           while (true) {
+               
+               System.out.println("Bir dil giriniz:");
+               dil = scanner.nextLine();
+               
+              
+               
+               if (dil.equals("-1")) {
+                   System.out.println("Programdan Çýkýlýyor...");
+                   System.out.println("Dosyayý Kontrol Edin...");
+                   break;
+               }
+               writer1.write(dil + "\n");   //kullanýcýdan aldýmýz degerleri teker teker diller.txt dosyasýna  yazdýrdýk
+               
+               
+           }
+            
+           
+        } catch (IOException ex) {
+            System.out.println("Dosya oluþturulurken hata oluþtu....");
+
+        }
+    }
+}
